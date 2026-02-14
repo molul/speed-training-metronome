@@ -74,8 +74,8 @@ watch(
 // ====== SVG coordinates ======
 function svgPt(p: GridPoint) {
   return {
-    x: (p.col - 1) * cellW.value,
-    y: (p.row - 1) * cellH.value,
+    x: p.col * cellW.value,
+    y: p.row * cellH.value,
   };
 }
 

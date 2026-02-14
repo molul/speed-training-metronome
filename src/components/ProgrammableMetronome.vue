@@ -6,12 +6,13 @@ import {
   type TempoPoint,
   useMetronomeEngine,
 } from "../composables/useMetronomeEngine";
+import Button from "./Button.vue";
 
 const cfg = reactive({
   startBpm: 100,
   maxBpm: 140,
   endBpm: 115,
-  infinite: true,
+  stopAtEnd: true,
   barsPerCell: 1,
 });
 
@@ -40,18 +41,22 @@ const engine = useMetronomeEngine();
 const tempoMap = computed(() => engine.buildTempoMap(points.value));
 
 function start() {
-  engine.start(points.value, cfg.infinite);
+  engine.start(points.value, cfg.stopAtEnd, cfg.barsPerCell);
 }
 </script>
 
 <template>
-  <div class="w-full max-w-[1080px] mx-auto p-2 flex flex-col gap-4">
+  <div
+    class="w-full max-w-[1080px] mx-auto p-3 rounded-md flex flex-col gap-4 bg-gray-700"
+  >
     <MetronomeControls v-model="cfg" />
 
-    <div class="flex gap-2">
-      <button class="border px-3 py-1" @click="start">start</button>
-      <button class="border px-3 py-1" @click="engine.stop()">stop</button>
+    <div class="flex gap-2 justify-center">
+      <Button label="Start" @click="start" />
+      <Button label="Stop" @click="engine.stop()" />
     </div>
+
+    <div>Current tempo: {{ engine.currentBpm }}</div>
 
     <MetronomeGrid
       :cols="cols"
