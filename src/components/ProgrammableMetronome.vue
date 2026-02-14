@@ -56,7 +56,7 @@ const tempoMap = computed(() =>
 );
 
 function start() {
-  engine.start(points.value, !cfg.stopAtEnd, cfg.barsPerCell);
+  engine.start(points.value, cfg.stopAtEnd, cfg.barsPerCell);
 }
 
 const menuVisible = ref(false);

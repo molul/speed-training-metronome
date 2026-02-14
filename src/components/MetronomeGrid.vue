@@ -57,14 +57,16 @@ const points = ref<GridPoint[]>([
 
 // Sync dots if props change from parent
 watch(
-  () => [props.startBpm, props.maxBpm, props.endBpm],
+  () => [props.startBpm, props.maxBpm, props.endBpm] as const,
   ([s, m, e]) => {
-    points.value[0].row = bpmToRow(s);
-    points.value[1].row = bpmToRow(m);
-    points.value[2].row = bpmToRow(e);
+    const pts = points.value;
+    if (pts[0] && pts[1] && pts[2]) {
+      pts[0].row = bpmToRow(s);
+      pts[1].row = bpmToRow(m);
+      pts[2].row = bpmToRow(e);
+    }
   }
 );
-
 const dragging = ref<number | null>(null);
 
 // Mobile + Desktop start dragging
@@ -90,34 +92,40 @@ function up() {
 function move(e: MouseEvent | TouchEvent) {
   if (dragging.value === null || !container.value) return;
 
+  const [p0, p1, p2] = points.value;
+  if (!p0 || !p1 || !p2) return;
+
   const r = container.value.getBoundingClientRect();
-  let clientX: number;
-  let clientY: number;
+
+  // 1. Declare variables HERE so they are visible to the whole function
+  let clientX = 0;
+  let clientY = 0;
 
   if ("touches" in e) {
-    clientX = e.touches[0].clientX;
-    clientY = e.touches[0].clientY;
+    const touch = e.touches[0];
+    if (!touch) return;
+    // 2. Assign values (no 'let' here)
+    clientX = touch.clientX;
+    clientY = touch.clientY;
   } else {
-    clientX = e.clientX;
-    clientY = e.clientY;
+    // 3. Assign values (no 'let' here)
+    clientX = (e as MouseEvent).clientX;
+    clientY = (e as MouseEvent).clientY;
   }
 
+  // Now clientX and clientY are defined and accessible here!
   let col = Math.floor((clientX - r.left) / cellW.value);
   let row = Math.floor((clientY - r.top) / cellH.value);
 
   col = Math.max(0, Math.min(props.cols - 1, col));
   row = Math.max(0, Math.min(props.rows - 1, row));
 
-  // Constraints logic
   if (dragging.value === 0) {
-    col = Math.min(col, points.value[1].col - 1);
+    col = Math.min(col, p1.col - 1);
   } else if (dragging.value === 1) {
-    col = Math.max(
-      points.value[0].col + 1,
-      Math.min(col, points.value[2].col - 1)
-    );
+    col = Math.max(p0.col + 1, Math.min(col, p2.col - 1));
   } else if (dragging.value === 2) {
-    col = Math.max(col, points.value[1].col + 1);
+    col = Math.max(col, p1.col + 1);
   }
 
   points.value[dragging.value] = { col, row };
@@ -130,15 +138,22 @@ const svgPt = (p: GridPoint) => ({
 
 // Fixed TS typing for segments
 const segments = computed(() => {
-  const p0 = svgPt(points.value[0]);
-  const p1 = svgPt(points.value[1]);
-  const p2 = svgPt(points.value[2]);
-  const last = { x: w.value, y: p2.y };
+  // 1. Destructure the points
+  const [p0, p1, p2] = points.value;
+
+  // 2. Guard: If any point is missing, return an empty array
+  if (!p0 || !p1 || !p2) return [];
+
+  // 3. Now TS knows p0, p1, and p2 are valid GridPoints
+  const pt0 = svgPt(p0);
+  const pt1 = svgPt(p1);
+  const pt2 = svgPt(p2);
+  const last = { x: w.value, y: pt2.y };
 
   return [
-    { x1: p0.x, y1: p0.y, x2: p1.x, y2: p1.y },
-    { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y },
-    { x1: p2.x, y1: p2.y, x2: last.x, y2: last.y },
+    { x1: pt0.x, y1: pt0.y, x2: pt1.x, y2: pt1.y },
+    { x1: pt1.x, y1: pt1.y, x2: pt2.x, y2: pt2.y },
+    { x1: pt2.x, y1: pt2.y, x2: last.x, y2: last.y },
   ];
 });
 
