@@ -11,8 +11,6 @@ interface Props {
 const props = defineProps<Props>();
 const model = defineModel<MetronomeConfig>();
 
-const menuVisible = ref(false);
-
 const presets = reactive<MetronomePreset[]>(
   JSON.parse(localStorage.getItem("metronomePresets") || "[]")
 );
