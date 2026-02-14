@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, watch, ref, type Ref } from "vue";
+import { reactive, watch, type Ref } from "vue";
 import type { MetronomeConfig, MetronomePreset } from "../assets/types";
 import TempoVariables from "./TempoVariables.vue";
 import Button from "./Button.vue";
