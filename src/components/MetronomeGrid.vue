@@ -173,6 +173,19 @@ const svgPt = (p: GridPoint) => ({
   y: p.row * cellH.value,
 });
 
+const draggedPointPos = computed(() => {
+  // 1. Check if dragging is a number (not null)
+  if (dragging.value === null) return null;
+
+  // 2. Grab the point
+  const pt = points.value[dragging.value];
+
+  // 3. Ensure the point exists before calling svgPt
+  if (!pt) return null;
+
+  return svgPt(pt);
+});
+
 const segments = computed(() => {
   const [p0, p1, p2] = points.value;
   if (!p0 || !p1 || !p2) return [];
@@ -309,6 +322,17 @@ watch(
           :y2="h"
           stroke-width="2"
           class="stroke-green-500"
+        />
+
+        <line
+          v-if="draggedPointPos"
+          x1="0"
+          :y1="draggedPointPos.y"
+          :x2="draggedPointPos.x"
+          :y2="draggedPointPos.y"
+          stroke-width="2"
+          stroke-dasharray="6 6"
+          class="pointer-events-none stroke-blue-300"
         />
 
         <g stroke-width="2" class="stroke-white z-50">
