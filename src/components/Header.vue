@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import MetronomeControls from './MetronomeControls.vue'
-import Button from './Button.vue'
 import { Icon } from '@iconify/vue'
 
 const menuVisible = ref(false)
