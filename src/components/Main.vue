@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MetronomeGrid from './MetronomeGrid.vue'
+import MetronomeSection from './MetronomeSection.vue'
 import { useMetronomeEngine } from '../composables/useMetronomeEngine'
 import { useMetronomeStore } from '../stores/useMetronomeStore'
 import Button from './Button.vue'
@@ -32,12 +32,12 @@ watch(engine.isRunning, val => {
 
 <template>
   <div
-    class="w-full max-w-sm mx-auto lg:rounded-lg flex flex-col gap-0 bg-gray-800 relative p-0 m-auto"
+    class="size-full lg:h-auto mx-auto lg:rounded-lg flex flex-col gap-0 bg-gray-800 relative p-0 lg:border border-gray-700 shadow-md"
   >
     <Header />
 
     <div class="flex flex-col gap-4 w-full">
-      <MetronomeGrid :cols="16" :rows="37" :playhead-bar="engine.visualBar" />
+      <MetronomeSection :cols="16" :rows="37" :playhead-bar="engine.visualBar" />
 
       <div class="flex gap-2 justify-center items-center px-3">
         <Button
