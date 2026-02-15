@@ -6,7 +6,7 @@ const store = useMetronomeStore()
 </script>
 
 <template>
-  <div class="flex flex-col h-full select-none z-10 bg-gray-800 translate-y-[1px]">
+  <div class="flex flex-col h-full select-none bg-gray-800 -translate-x-[2px]">
     <div
       v-for="r in store.rows"
       :key="r"

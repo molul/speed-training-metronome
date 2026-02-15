@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useMetronomeStore } from '../stores/useMetronomeStore'
-import MetronomeCanvas from './MetronomeCanvas.vue'
+import MetronomeGrid from './MetronomeGrid.vue'
 import MetronomeTempos from './MetronomeTempos.vue'
 import type { TempoPoint } from '../composables/useMetronomeEngine'
 
@@ -108,14 +108,14 @@ const currentCol = computed(() => {
 <template>
   <div
     ref="container"
-    class="w-full relative flex px-4 rounded-lg overflow-hidden"
+    class="w-full flex"
     :style="{
       padding: `0 ${store.metronomeSectionPadding}px`
     }"
   >
     <MetronomeTempos :height="h" />
 
-    <MetronomeCanvas
+    <MetronomeGrid
       :width="w"
       :height="h"
       :cols="cols"
