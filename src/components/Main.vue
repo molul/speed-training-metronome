@@ -56,9 +56,22 @@ watch(engine.isRunning, val => {
           @click="stop"
         />
       </div>
-      <span class="font-bold text-2xl px-3 pb-4 text-white text-center">
+      <span class="font-bold text-2xl px-3 text-white text-center">
         {{ engine.currentBpm }} BPM
       </span>
+
+      <div class="text-xs text-center font-medium p-4">
+        Developed by
+        <a
+          href="https://www.luismorcilloluque.com"
+          rel="noopener noreferrer"
+          target="_blank"
+          class="text-blue-300 hover:underline"
+        >
+          Luis Morcillo Luque
+        </a>
+        with Vue 3 © 2026
+      </div>
     </div>
   </div>
 </template>
