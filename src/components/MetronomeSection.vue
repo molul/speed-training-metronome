@@ -18,15 +18,15 @@ interface Props {
 const props = defineProps<Props>()
 const store = useMetronomeStore()
 
-const tempoColumnWidth = 26
-const padding = 16
+//const tempoColumnWidth = 26
+//const padding = 16
 const container = ref<HTMLDivElement | null>(null)
 const w = ref(300)
 const h = ref(500)
 
 function resize() {
   if (!container.value) return
-  const cw = container.value.clientWidth
+  //const cw = container.value.clientWidth
   //w.value = cw - tempoColumnWidth - padding * 2
 w.value = 320
 h.value = 555
