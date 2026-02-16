@@ -60,7 +60,7 @@ watch(engine.isRunning, val => {
         {{ engine.currentBpm }} BPM
       </span>
 
-      <div class="text-xs text-center font-medium p-4">
+      <div class="text-xs text-center font-medium p-4 pt-0">
         Developed by
         <a
           href="https://www.luismorcilloluque.com"
