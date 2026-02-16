@@ -89,7 +89,7 @@ watch(
             :key="step"
             @click="store.config.tempoStep = step"
             :class="[
-              'px-3 py-1 rounded font-bold transition-colors cursor-pointer capitalize',
+              'px-3 py-1 rounded font-semibold transition-colors cursor-pointer capitalize',
               store.config.tempoStep === step
                 ? 'bg-blue-600 text-white'
                 : 'text-gray-400 hover:text-white'
