@@ -30,7 +30,7 @@ const store = useMetronomeStore()
           class="border-t-0 bg-yellow-500 size-full"
         />
       </div>
-      <span :class="[store.config.startBpm, store.config.maxBpm, store.config.endBpm].includes(store.rowToBpm(r)) ? 'text-gray-900' : ''">{{ store.rowToBpm(r) }}</span>
+      <span :class="[[store.config.startBpm, store.config.maxBpm, store.config.endBpm].includes(store.rowToBpm(r)) ? 'text-gray-900' : '', 'z-30']">{{ store.rowToBpm(r) }}</span>
     </div>
   </div>
 </template>
