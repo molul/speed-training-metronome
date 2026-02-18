@@ -170,7 +170,14 @@ const currentCol = computed(() => {
 </script>
 
 <template>
-  <div ref="container" class="w-full flex px-4">
+  <div ref="container" class="w-full flex px-4 relative">
+    <span
+      v-if="store.isRunning"
+      class="font-bold text-2xl px-3 text-white text-center absolute bg-black/50 rounded-md bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+    >
+      {{ store.currentBpm }}
+    </span>
+
     <MetronomeTempos :height="h" />
 
     <div class="w-full bg-zinc-700">
@@ -251,8 +258,14 @@ const currentCol = computed(() => {
           :cy="svgPt(p).y"
           r="12"
           :class="[
-            'cursor-pointer',
-            i === 0 ? 'fill-green-400' : i === 1 ? 'fill-red-400' : 'fill-yellow-400'
+            { 'cursor-pointer': !store.isRunning },
+            store.isRunning
+              ? 'fill-zinc-400'
+              : i === 0
+              ? 'fill-green-400'
+              : i === 1
+              ? 'fill-red-400'
+              : 'fill-yellow-400'
           ]"
           @mousedown="down(i, $event)"
           @touchstart.prevent="down(i, $event)"
