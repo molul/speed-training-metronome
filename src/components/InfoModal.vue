@@ -4,14 +4,14 @@
   <div
     class="flex flex-col gap-2 bg-zinc-900/50 rounded-xl text-zinc-300 text-sm leading-relaxed shadow-inner max-w-sm"
   >
-    <h3 class="text-white font-bold mb-3 text-base">The Philosophy</h3>
-    <p class="mb-4">
+    <h3 class="text-white font-bold text-base">The Philosophy</h3>
+    <p class="">
       To acquire speed, you shouldn't just play at a fixed tempo. True progress happens
       when you stretch your nervous system to its limit and then "settle" into a new,
       faster comfort zone.
     </p>
 
-    <div class="flex flex-col gap-4 mt-6">
+    <div class="flex flex-col gap-4 ">
       <div class="bg-zinc-800/50 p-3 rounded-lg border-l-4 border-green-500">
         <div class="text-green-400 font-bold text-xs mb-1 uppercase tracking-wider">
           Step 1: Start
