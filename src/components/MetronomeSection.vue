@@ -173,7 +173,7 @@ const currentCol = computed(() => {
   <div ref="container" class="w-full flex px-4 relative">
     <span
       v-if="store.isRunning"
-      class="font-bold text-2xl px-3 text-white text-center absolute bg-black/50 rounded-md bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+      class="font-bold text-4xl px-3 text-white text-center absolute bg-black/50 rounded-md bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
     >
       {{ store.currentBpm }}
     </span>
