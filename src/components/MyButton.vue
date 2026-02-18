@@ -6,6 +6,7 @@ interface Props {
   icon?: string
   fullWidth?: boolean
   size?: 'normal' | 'big'
+  severity?: string
   type?: 'primary' | 'secondary' | 'text' | 'alert'
   shape?: 'rounded' | 'square'
   disabled?: boolean
@@ -22,7 +23,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <Button
+    :severity="props.severity"
     :label="props.label"
+    :disabled="props.disabled"
     :fluid="props.fullWidth"
     :class="[
       '!text-sm',
@@ -30,7 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
       { '!size-16 text-3xl': props.size === 'big' }
     ]"
     :pt="{
-      root: '!px-4 !py-2 bg-blue-600 justify-center items-center hover:bg-blue-500 active:bg-blue-600 flex gap-2.5 !text-xs',
+      root: 'bg-blue-600 justify-center items-center hover:bg-blue-500 active:bg-blue-600 flex gap-2.5 !text-xs',
       label: '!text-lg !font-semibold !text-sm'
     }"
   >
@@ -38,7 +41,7 @@ const props = withDefaults(defineProps<Props>(), {
       <Icon
         v-if="props.icon"
         :icon="props.icon"
-        :class="[props.size === 'big' ? 'size-7' : 'size-4']"
+        :class="[props.size === 'big' ? 'size-7' : 'size-5']"
       />
     </template>
   </Button>

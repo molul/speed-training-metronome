@@ -1,39 +1,36 @@
-import { ref } from "vue";
-import highUrl from "@assets/metronomeSounds/high.wav";
-import lowUrl from "@assets/metronomeSounds/low.wav";
+import highUrl from '@assets/metronomeSounds/high.wav'
+import lowUrl from '@assets/metronomeSounds/low.wav'
+import { useMetronomeStore } from '../stores/useMetronomeStore'
 
 export interface TempoPoint {
-  bar: number; // Cell index
-  bpm: number;
+  bar: number // Cell index
+  bpm: number
 }
 
 // Added the type for the new feature
-export type TempoStep = "bar" | "cell";
+export type TempoStep = 'bar' | 'cell'
 
 export function useMetronomeEngine() {
-  const isRunning = ref(false);
-  const currentBar = ref(0);
-  const visualBar = ref(0);
-  const currentBpm = ref(0);
+  const store = useMetronomeStore() // Access the shared store
 
-  const TOTAL_CELLS = 16;
+  const TOTAL_CELLS = 16
 
-  let ctx: AudioContext | null = null;
-  let hiBuf: AudioBuffer | null = null;
-  let loBuf: AudioBuffer | null = null;
+  let ctx: AudioContext | null = null
+  let hiBuf: AudioBuffer | null = null
+  let loBuf: AudioBuffer | null = null
 
   async function loadSample(url: string): Promise<AudioBuffer> {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error("Failed loading sample: " + url);
-    const arr = await res.arrayBuffer();
-    if (!ctx) throw new Error("AudioContext not initialized");
-    return await ctx.decodeAudioData(arr);
+    const res = await fetch(url)
+    if (!res.ok) throw new Error('Failed loading sample: ' + url)
+    const arr = await res.arrayBuffer()
+    if (!ctx) throw new Error('AudioContext not initialized')
+    return await ctx.decodeAudioData(arr)
   }
 
   async function load() {
-    ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
-    hiBuf = await loadSample(highUrl);
-    loBuf = await loadSample(lowUrl);
+    ctx = new (window.AudioContext || (window as any).webkitAudioContext)()
+    hiBuf = await loadSample(highUrl)
+    loBuf = await loadSample(lowUrl)
   }
 
   function bpmAtBar(
@@ -41,120 +38,117 @@ export function useMetronomeEngine() {
     pts: [TempoPoint, TempoPoint, TempoPoint],
     barsPerCell: number
   ): number {
-    const a = { bar: pts[0].bar * barsPerCell, bpm: pts[0].bpm };
-    const b = { bar: pts[1].bar * barsPerCell, bpm: pts[1].bpm };
-    const c = { bar: pts[2].bar * barsPerCell, bpm: pts[2].bpm };
+    const a = { bar: pts[0].bar * barsPerCell, bpm: pts[0].bpm }
+    const b = { bar: pts[1].bar * barsPerCell, bpm: pts[1].bpm }
+    const c = { bar: pts[2].bar * barsPerCell, bpm: pts[2].bpm }
 
-    if (bar <= a.bar) return a.bpm;
+    if (bar <= a.bar) return a.bpm
 
     if (bar <= b.bar) {
-      const t = (bar - a.bar) / (b.bar - a.bar || 1);
-      return a.bpm + t * (b.bpm - a.bpm);
+      const t = (bar - a.bar) / (b.bar - a.bar || 1)
+      return a.bpm + t * (b.bpm - a.bpm)
     }
 
     if (bar <= c.bar) {
-      const t = (bar - b.bar) / (c.bar - b.bar || 1);
-      return b.bpm + t * (c.bpm - b.bpm);
+      const t = (bar - b.bar) / (c.bar - b.bar || 1)
+      return b.bpm + t * (c.bpm - b.bpm)
     }
 
-    return c.bpm;
+    return c.bpm
   }
 
   function buildTempoMap(
     pts: [TempoPoint, TempoPoint, TempoPoint],
     barsPerCell: number = 1,
-    tempoStep: TempoStep = "cell" // Defaulting to cell
+    tempoStep: TempoStep = 'cell' // Defaulting to cell
   ): number[] {
-    const totalBars = TOTAL_CELLS * barsPerCell;
-    const out: number[] = [];
+    const totalBars = TOTAL_CELLS * barsPerCell
+    const out: number[] = []
     for (let i = 0; i < totalBars; i++) {
       // Logic for step calculation
       const targetBar =
-        tempoStep === "cell" ? Math.floor(i / barsPerCell) * barsPerCell : i;
-      out.push(bpmAtBar(targetBar, pts, barsPerCell));
+        tempoStep === 'cell' ? Math.floor(i / barsPerCell) * barsPerCell : i
+      out.push(bpmAtBar(targetBar, pts, barsPerCell))
     }
-    return out;
+    return out
   }
 
   async function start(
     points: [TempoPoint, TempoPoint, TempoPoint],
     stopAtEnd: boolean,
     barsPerCell: number = 1,
-    tempoStep: TempoStep = "cell"
+    tempoStep: TempoStep = 'cell'
   ) {
-    if (!ctx) await load();
-    if (!ctx || !hiBuf || !loBuf) return;
-    if (ctx.state === "suspended") await ctx.resume();
+    if (!ctx) await load()
+    if (!ctx || !hiBuf || !loBuf) return
+    if (ctx.state === 'suspended') await ctx.resume()
 
-    isRunning.value = true;
-    currentBar.value = 0;
-    visualBar.value = 0;
+    store.isRunning = true
+    store.currentBar = 0
+    store.visualBar = 0
 
-    const LOOK_AHEAD_MS = 25;
-    const SCHEDULE_AHEAD_TIME = 0.1;
-    const totalBarsInGrid = TOTAL_CELLS * barsPerCell;
+    const LOOK_AHEAD_MS = 25
+    const SCHEDULE_AHEAD_TIME = 0.1
+    const totalBarsInGrid = TOTAL_CELLS * barsPerCell
 
-    let nextBeatTime = ctx.currentTime;
-    let beatInBar = 0;
+    let nextBeatTime = ctx.currentTime
+    store.beatInBar = 0
 
     const scheduler = setInterval(() => {
-      if (!isRunning.value) {
-        clearInterval(scheduler);
-        return;
+      if (!store.isRunning) {
+        clearInterval(scheduler)
+        return
       }
 
-      if (!ctx) return;
+      if (!ctx) return
 
       while (nextBeatTime < ctx.currentTime + SCHEDULE_AHEAD_TIME) {
-        if (stopAtEnd && currentBar.value >= totalBarsInGrid) {
-          stop();
-          break;
+        if (stopAtEnd && store.currentBar >= totalBarsInGrid) {
+          stop()
+          break
         }
 
         const calculationBar =
-          tempoStep === "cell"
-            ? Math.floor(currentBar.value / barsPerCell) * barsPerCell
-            : currentBar.value;
+          tempoStep === 'cell'
+            ? Math.floor(store.currentBar / barsPerCell) * barsPerCell
+            : store.currentBar
 
-        const activeBpm = bpmAtBar(calculationBar, points, barsPerCell);
+        const activeBpm = bpmAtBar(calculationBar, points, barsPerCell)
 
         // Corrected: 60 / BPM is exactly one quarter note beat
-        const secondsPerBeat = 60 / activeBpm;
+        const secondsPerBeat = 60 / activeBpm
 
-        const source = ctx!.createBufferSource();
-        source.buffer = beatInBar === 0 ? hiBuf! : loBuf!;
-        source.connect(ctx!.destination);
-        source.start(nextBeatTime);
+        const source = ctx!.createBufferSource()
+        source.buffer = store.beatInBar === 0 ? hiBuf! : loBuf!
+        source.connect(ctx!.destination)
+        source.start(nextBeatTime)
 
-        if (beatInBar === 0) {
-          visualBar.value = currentBar.value;
-          currentBpm.value = Math.round(activeBpm);
+        if (store.beatInBar === 0) {
+          store.visualBar = store.currentBar
+          store.currentBpm = Math.round(activeBpm)
         }
 
         // Increment by the full beat duration
-        nextBeatTime += secondsPerBeat;
+        nextBeatTime += secondsPerBeat
 
-        beatInBar++;
+        store.beatInBar++
         // Reset after 4 beats to complete one full bar in 4/4 time
-        if (beatInBar >= 4) {
-          beatInBar = 0;
-          currentBar.value++;
+        if (store.beatInBar >= 4) {
+          store.beatInBar = 0
+          store.currentBar++
         }
       }
-    }, LOOK_AHEAD_MS);
+    }, LOOK_AHEAD_MS)
   }
 
   function stop() {
-    isRunning.value = false;
+    store.isRunning = false
   }
 
   return {
     start,
     stop,
-    isRunning,
-    currentBar,
-    visualBar,
-    currentBpm,
-    buildTempoMap,
-  };
+
+    buildTempoMap
+  }
 }

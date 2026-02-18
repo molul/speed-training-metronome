@@ -11,11 +11,13 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BeatIndicator: typeof import('./src/components/BeatIndicator.vue')['default']
     Button: typeof import('primevue/button')['default']
     Checkbox: typeof import('primevue/checkbox')['default']
     CheckboxControl: typeof import('./src/components/CheckboxControl.vue')['default']
     CheckBoxControl: typeof import('./src/components/CheckBoxControl.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
+    InfoModal: typeof import('./src/components/InfoModal.vue')['default']
     Label: typeof import('./src/components/Label.vue')['default']
     Main: typeof import('./src/components/Main.vue')['default']
     MetronomeControls: typeof import('./src/components/MetronomeControls.vue')['default']
@@ -26,6 +28,7 @@ declare module 'vue' {
     Select: typeof import('primevue/select')['default']
     SelectButton: typeof import('primevue/selectbutton')['default']
     SelectButtonControl: typeof import('./src/components/SelectButtonControl.vue')['default']
+    SettingsModal: typeof import('./src/components/SettingsModal.vue')['default']
     Slider: typeof import('primevue/slider')['default']
     SliderControl: typeof import('./src/components/SliderControl.vue')['default']
     TempoVariables: typeof import('./src/components/TempoVariables.vue')['default']

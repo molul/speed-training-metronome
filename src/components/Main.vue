@@ -4,6 +4,7 @@ import { useMetronomeEngine } from '../composables/useMetronomeEngine'
 import { useMetronomeStore } from '../stores/useMetronomeStore'
 import MyButton from './MyButton.vue'
 import Header from './Header.vue'
+import BeatIndicator from './BeatIndicator.vue'
 
 const store = useMetronomeStore()
 const engine = useMetronomeEngine()
@@ -22,12 +23,6 @@ function stop() {
   engine.stop()
   store.isRunning = false
 }
-
-// Sync engine's internal running state back to store
-import { watch } from 'vue'
-watch(engine.isRunning, val => {
-  store.isRunning = val
-})
 </script>
 
 <template>
@@ -37,7 +32,9 @@ watch(engine.isRunning, val => {
     <Header />
 
     <div class="flex flex-col gap-4 w-full">
-      <MetronomeSection :cols="16" :rows="37" :playhead-bar="engine.visualBar" />
+      <BeatIndicator />
+
+      <MetronomeSection :cols="16" :rows="37" :playhead-bar="store.visualBar" />
 
       <div class="flex gap-2 justify-center items-center px-3">
         <MyButton
@@ -56,9 +53,6 @@ watch(engine.isRunning, val => {
           @click="stop"
         />
       </div>
-      <span class="font-bold text-2xl px-3 text-white text-center">
-        {{ engine.currentBpm }} BPM
-      </span>
 
       <div class="text-xs text-center font-medium p-4 pt-0">
         Developed by

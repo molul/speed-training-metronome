@@ -1,29 +1,42 @@
 import { defineStore } from 'pinia'
 import { computed, reactive, ref, watch } from 'vue'
-import type { MetronomeConfig, MetronomePreset, TempoPoint } from '../assets/types'
+import type {
+  MetronomeConfig,
+  MetronomePreset,
+  TempoPoint,
+  TempoStep
+} from '../assets/types'
 
 export const useMetronomeStore = defineStore('metronome', () => {
   // 1. State
+
+  const isRunning = ref(false)
+  const currentBar = ref(0)
+  const visualBar = ref(0)
+  const currentBpm = ref(0)
+  const beatInBar = ref(0)
+
   const dragging = ref<number | null>(null)
 
-  const config = reactive<MetronomeConfig>({
+  const defaultConfig = {
     startBpm: 100,
-    maxBpm: 140,
+    maxBpm: 160,
     endBpm: 115,
     stopAtEnd: true,
     barsPerCell: 1,
-    tempoStep: 'cell',
+    tempoStep: 'cell' as TempoStep,
     points: [
       { bar: 0, bpm: 100 },
       { bar: 8, bpm: 140 },
       { bar: 12, bpm: 115 }
-    ]
-  })
+    ] as [TempoPoint, TempoPoint, TempoPoint]
+  }
+
+  const config = reactive<MetronomeConfig>(defaultConfig)
 
   const temposColumnWidth = ref(25)
   const metronomeSectionPadding = ref(16)
 
-  const isRunning = ref(false)
   const rows = 37 // Total number of 5-BPM steps from 40 to 220
 
   // 2. Load initial data from localStorage
@@ -64,6 +77,20 @@ export const useMetronomeStore = defineStore('metronome', () => {
     config.tempoStep = p.tempoStep || 'cell'
   }
 
+  function reset() {
+    config.startBpm = 100
+    config.maxBpm = 160
+    config.endBpm = 130
+    config.stopAtEnd = false
+    config.barsPerCell = 1
+    config.tempoStep = 'bar'
+    config.points = [
+      { bar: 0, bpm: 100 },
+      { bar: 8, bpm: 140 },
+      { bar: 12, bpm: 115 }
+    ]
+  }
+
   // 5. Watchers
   // Sync BPM changes (from buttons/inputs) to the points array
   watch(
@@ -85,13 +112,18 @@ export const useMetronomeStore = defineStore('metronome', () => {
 
   return {
     dragging,
+    beatInBar,
     config,
     isRunning,
+    currentBar,
+    visualBar,
+    currentBpm,
     temposColumnWidth,
     rows,
     metronomeSectionPadding,
     gridPoints, // Add this
     updatePoints,
+    reset,
     loadPreset,
     bpmToRow,
     rowToBpm
