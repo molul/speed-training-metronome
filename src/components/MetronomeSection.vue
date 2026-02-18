@@ -93,13 +93,11 @@ function move(e: MouseEvent | TouchEvent) {
 
   const rect = svgEl.getBoundingClientRect()
 
-  // Fix: Object is possibly 'undefined' for touches
   let clientX = 0
   let clientY = 0
-
   if ('touches' in e) {
     const touch = e.touches[0]
-    if (!touch) return // Guard against empty touch list
+    if (!touch) return
     clientX = touch.clientX
     clientY = touch.clientY
   } else {
@@ -112,6 +110,19 @@ function move(e: MouseEvent | TouchEvent) {
 
   let col = Math.max(0, Math.min(props.cols - 1, Math.floor(internalX / cellW.value)))
   let row = Math.max(0, Math.min(props.rows, Math.round(internalY / cellH.value)))
+
+  // --- HORIZONTAL CONSTRAINTS ONLY ---
+  if (dragging.value === 0) {
+    // Start Point: cannot move to or past Peak Point's column
+    col = Math.min(col, p1.col - 1)
+  } else if (dragging.value === 1) {
+    // Peak Point: must stay between Start and End columns
+    col = Math.max(p0.col + 1, Math.min(col, p2.col - 1))
+    // Note: row is not limited here, so it can be lower or higher than p0/p2
+  } else if (dragging.value === 2) {
+    // End Point: cannot move to or before Peak Point's column
+    col = Math.max(col, p1.col + 1)
+  }
 
   points.value[dragging.value] = { col, row }
 
