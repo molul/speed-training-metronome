@@ -180,7 +180,9 @@ const currentCol = computed(() => {
 
     <MetronomeTempos :height="h" />
 
-    <div class="w-full bg-zinc-700">
+    <div class="w-full bg-zinc-700"
+:style="{transform: 'translateY('+cellH/2+'px);}"
+>
       <svg
         :width="w"
         :height="h"
