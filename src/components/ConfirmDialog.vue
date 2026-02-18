@@ -3,7 +3,7 @@ import { inject } from 'vue'
 import MyButton from './MyButton.vue'
 
 const dialogRef = inject('dialogRef') as any
-// Destructure the data passed from the parent dialog
+
 const { message, confirmLabel, confirmSeverity } = dialogRef.value.data
 
 const close = (confirmed: boolean) => {

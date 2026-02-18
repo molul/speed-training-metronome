@@ -12,6 +12,7 @@ const model = defineModel<string>()
 <template>
   <div class="flex gap-2 items-center justify-between w-full">
     <Label :label="props.label" class="w-30 text-left" />
+
     <SelectButton v-model="model" :options="props.options" class="!rounded-lg">
       <template #option="{ option }">
         <span

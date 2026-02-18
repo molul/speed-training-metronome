@@ -10,9 +10,16 @@ import PresetsDialog from './PresetsDialog.vue'
 
 const menuVisible = ref(false)
 const containerRef = ref<HTMLElement | null>(null)
-
+const dialog = useDialog()
 const store = useMetronomeStore()
 
+onMounted(() => window.addEventListener('mousedown', handleClickOutside))
+
+onUnmounted(() => window.removeEventListener('mousedown', handleClickOutside))
+
+// ----------------------------------------
+// handleClickOutside
+// ----------------------------------------
 const handleClickOutside = (event: MouseEvent) => {
   if (
     menuVisible.value &&
@@ -23,11 +30,9 @@ const handleClickOutside = (event: MouseEvent) => {
   }
 }
 
-onMounted(() => window.addEventListener('mousedown', handleClickOutside))
-onUnmounted(() => window.removeEventListener('mousedown', handleClickOutside))
-
-const dialog = useDialog()
-
+// ----------------------------------------
+// handleShowSettingsDialog
+// ----------------------------------------
 const handleShowSettingsDialog = () => {
   dialog.open(SettingsDialog, {
     props: {
@@ -38,6 +43,9 @@ const handleShowSettingsDialog = () => {
   })
 }
 
+// ----------------------------------------
+// handleShowInfoModal
+// ----------------------------------------
 const handleShowInfoModal = () => {
   dialog.open(InfoModal, {
     props: {
@@ -48,6 +56,9 @@ const handleShowInfoModal = () => {
   })
 }
 
+// ----------------------------------------
+// handleShowPresetsModal
+// ----------------------------------------
 const handleShowPresetsModal = () => {
   dialog.open(PresetsDialog, {
     props: {

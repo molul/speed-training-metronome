@@ -3,6 +3,17 @@ import { useMetronomeStore } from '../stores/useMetronomeStore'
 
 defineProps<{ height: number }>()
 const store = useMetronomeStore()
+
+const getRowBgClass = (rowIndex: number) => {
+  const bpm = store.rowToBpm(rowIndex)
+  const { startBpm, peakBpm, endBpm } = store.config
+
+  if (bpm === startBpm) return 'bg-green-400'
+  if (bpm === peakBpm) return 'bg-red-400'
+  if (bpm === endBpm) return 'bg-yellow-400'
+
+  return ''
+}
 </script>
 
 <template>
@@ -10,44 +21,14 @@ const store = useMetronomeStore()
     <div
       v-for="r in store.rows + 1"
       :key="r"
-      class="text-[11px] text-white flex items-end justify-end pr-0.5 border-b-0 border-zinc-500 relative font-semibold leading-none"
-      :style="{
-        width: '30px',
-        //width: store.temposColumnWidth + 'px',
-        height: height / store.rows + 'px'
-      }"
+      class="text-[11px] text-white flex items-end justify-end pr-0.5 relative font-semibold leading-tight"
+      :style="{ width: '30px', height: height / store.rows + 'px' }"
     >
-      <div class="absolute top-0 left-0 size-full flex">
-        <div
-          v-if="store.rowToBpm(r - 1) === store.config.startBpm"
-          class="bg-green-400 size-full"
-        >
-          &nbsp;
-        </div>
-        <div
-          v-if="store.rowToBpm(r - 1) === store.config.peakBpm"
-          class="bg-red-400 size-full"
-        >
-          &nbsp;
-        </div>
-        <div
-          v-if="store.rowToBpm(r - 1) === store.config.endBpm"
-          class="bg-yellow-400 size-full"
-        >
-          &nbsp;
-        </div>
-      </div>
-      <span
-        :class="[
-          [store.config.startBpm, store.config.peakBpm, store.config.endBpm].includes(
-            store.rowToBpm(r - 1)
-          )
-            ? 'text-zinc-900'
-            : '',
-          'z-30'
-        ]"
-        >{{ store.rowToBpm(r) + 5 }}</span
-      >
+      <div class="absolute top-0 left-0 size-full z-0" :class="getRowBgClass(r - 1)" />
+
+      <span :class="['z-30', { 'text-zinc-900': getRowBgClass(r - 1) !== '' }]">
+        {{ store.rowToBpm(r) + 5 }}
+      </span>
     </div>
   </div>
 </template>

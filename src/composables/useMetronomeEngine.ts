@@ -3,7 +3,7 @@ import lowUrl from '@assets/metronomeSounds/low.wav'
 import { useMetronomeStore } from '../stores/useMetronomeStore'
 
 export interface TempoPoint {
-  bar: number // Cell index
+  bar: number
   bpm: number
 }
 
@@ -11,7 +11,7 @@ export interface TempoPoint {
 export type TempoStep = 'bar' | 'cell'
 
 export function useMetronomeEngine() {
-  const store = useMetronomeStore() // Access the shared store
+  const store = useMetronomeStore()
 
   const TOTAL_CELLS = 16
 
@@ -115,7 +115,7 @@ export function useMetronomeEngine() {
 
         const activeBpm = bpmAtBar(calculationBar, points, barsPerCell)
 
-        // Corrected: 60 / BPM is exactly one quarter note beat
+        // 60 / BPM is exactly one quarter note beat
         const secondsPerBeat = 60 / activeBpm
 
         const source = ctx!.createBufferSource()
@@ -128,11 +128,9 @@ export function useMetronomeEngine() {
           store.currentBpm = Math.round(activeBpm)
         }
 
-        // Increment by the full beat duration
         nextBeatTime += secondsPerBeat
 
         store.beatInBar++
-        // Reset after 4 beats to complete one full bar in 4/4 time
         if (store.beatInBar >= 4) {
           store.beatInBar = 0
           store.currentBar++
@@ -148,7 +146,6 @@ export function useMetronomeEngine() {
   return {
     start,
     stop,
-
     buildTempoMap
   }
 }

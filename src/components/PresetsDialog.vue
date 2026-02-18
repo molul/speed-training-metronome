@@ -19,7 +19,7 @@ const saveToStorage = () => {
 
 const handleLoad = (preset: any) => {
   store.loadPreset(preset)
-  dialogRef.value.close() // Close the presets list after loading
+  dialogRef.value.close()
 }
 
 const handleDelete = (index: number) => {

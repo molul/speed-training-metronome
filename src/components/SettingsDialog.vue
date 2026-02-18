@@ -6,7 +6,6 @@ import SliderControl from './SliderControl.vue'
 import MyButton from './MyButton.vue'
 import SelectButtonControl from './SelectButtonControl.vue'
 import CheckBoxControl from './CheckboxControl.vue'
-// import type { SelectChangeEvent } from 'primevue/select'
 import { useDialog } from 'primevue/usedialog'
 import SavePresetDialog from './SavePresetDialog.vue' // Import the new component
 
@@ -14,7 +13,7 @@ const store = useMetronomeStore()
 const presets = reactive<MetronomePreset[]>(
   JSON.parse(window.localStorage.getItem('metronomePresets') || '[]')
 )
-const dialog = useDialog() // Initialize dialog
+const dialog = useDialog()
 
 function handleOpenSaveModal() {
   dialog.open(SavePresetDialog, {
@@ -22,7 +21,6 @@ function handleOpenSaveModal() {
       header: 'Save Preset',
       modal: true,
       dismissableMask: true,
-      // Adjust width for mobile/desktop
       style: {
         width: '90vw',
         maxWidth: '24rem'

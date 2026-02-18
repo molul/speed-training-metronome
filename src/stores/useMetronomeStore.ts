@@ -8,8 +8,6 @@ import type {
 } from '../assets/types'
 
 export const useMetronomeStore = defineStore('metronome', () => {
-  // 1. State
-
   const isRunning = ref(false)
   const currentBar = ref(0)
   const visualBar = ref(0)
@@ -37,9 +35,8 @@ export const useMetronomeStore = defineStore('metronome', () => {
   const temposColumnWidth = ref(25)
   const metronomeSectionPadding = ref(16)
 
-  const rows = 37 // Total number of 5-BPM steps from 40 to 220
+  const rows = 37 // Total number of 5-BPM steps from 40 to 225
 
-  // 2. Load initial data from localStorage
   const saved = window.localStorage.getItem('metronomeConfig')
   if (saved) {
     try {
@@ -49,11 +46,8 @@ export const useMetronomeStore = defineStore('metronome', () => {
     }
   }
 
-  // 3. Mathematical Helpers
   const bpmToRow = (bpm: number) => Math.round(rows - (bpm - 40) / 5)
   const rowToBpm = (row: number) => 40 + (rows - row) * 5
-
-  // 4. Actions
 
   function updatePoints(p: [TempoPoint, TempoPoint, TempoPoint]) {
     config.points = p
@@ -91,7 +85,6 @@ export const useMetronomeStore = defineStore('metronome', () => {
     ]
   }
 
-  // 5. Watchers
   // Sync BPM changes (from buttons/inputs) to the points array
   watch(
     [() => config.startBpm, () => config.peakBpm, () => config.endBpm],
@@ -102,7 +95,6 @@ export const useMetronomeStore = defineStore('metronome', () => {
     }
   )
 
-  // Getters
   const gridPoints = computed(() =>
     config.points.map(p => ({
       col: p.bar,
@@ -121,7 +113,7 @@ export const useMetronomeStore = defineStore('metronome', () => {
     temposColumnWidth,
     rows,
     metronomeSectionPadding,
-    gridPoints, // Add this
+    gridPoints,
     updatePoints,
     reset,
     loadPreset,

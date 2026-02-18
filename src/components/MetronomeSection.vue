@@ -24,14 +24,51 @@ const container = ref<HTMLDivElement | null>(null)
 const w = ref(300)
 const h = ref(500)
 
-function resize() {
-  if (!container.value) return
-  const cw = container.value.clientWidth
-  w.value = cw - tempoColumnWidth - padding * 2
-  // w.value = 320
-  h.value = 518
-  //h.value = Math.min(window.innerHeight * 0.7, cw * 1.5)
-}
+const cellW = computed(() => w.value / props.cols)
+const cellH = computed(() => h.value / props.rows)
+const points = ref<GridPoint[]>([])
+
+const dragging = ref<number | null>(null)
+
+const draggedPointPos = computed(() => {
+  if (dragging.value === null) return null
+  const pt = points.value[dragging.value]
+  // Fix: Type narrowing for svgPt
+  if (!pt) return null
+  return svgPt(pt)
+})
+
+const segments = computed(() => {
+  const p0 = points.value[0]
+  const p1 = points.value[1]
+  const p2 = points.value[2]
+  if (!p0 || !p1 || !p2) return []
+
+  const pt0 = svgPt(p0)
+  const pt1 = svgPt(p1)
+  const pt2 = svgPt(p2)
+
+  return [
+    { x1: 0, y1: pt0.y, x2: pt0.x, y2: pt0.y },
+    { x1: pt0.x, y1: pt0.y, x2: pt1.x, y2: pt1.y },
+    { x1: pt1.x, y1: pt1.y, x2: pt2.x, y2: pt2.y },
+    { x1: pt2.x, y1: pt2.y, x2: w.value, y2: pt2.y }
+  ]
+})
+
+const playheadX = computed(() => {
+  const bar =
+    typeof props.playheadBar === 'object' ? props.playheadBar.value : props.playheadBar
+  if (bar === null || bar === undefined) return 0
+  return Math.max(0, Math.min(w.value, (bar / store.config.barsPerCell) * cellW.value))
+})
+
+const currentCol = computed(() => {
+  const bar =
+    typeof props.playheadBar === 'object' ? props.playheadBar.value : props.playheadBar
+  if (bar === null || bar === undefined) return null
+  return Math.min(props.cols - 1, Math.floor(bar / store.config.barsPerCell))
+})
 
 onMounted(() => {
   resize()
@@ -42,13 +79,17 @@ onUnmounted(() => {
   window.removeEventListener('resize', resize)
 })
 
-const cellW = computed(() => w.value / props.cols)
-const cellH = computed(() => h.value / props.rows)
+function resize() {
+  if (!container.value) return
+  const cw = container.value.clientWidth
+  w.value = cw - tempoColumnWidth - padding * 2
+  // w.value = 320
+  h.value = 518
+  //h.value = Math.min(window.innerHeight * 0.7, cw * 1.5)
+}
 
 const bpmToRow = (bpm: number) => Math.round(props.rows - (bpm - 40) / 5)
 const rowToBpm = (row: number) => 40 + (props.rows - row) * 5
-
-const points = ref<GridPoint[]>([])
 
 const syncPointsFromStore = () => {
   points.value = store.config.points.map(p => ({
@@ -61,8 +102,6 @@ watch(() => store.config.points, syncPointsFromStore, {
   deep: true,
   immediate: true
 })
-
-const dragging = ref<number | null>(null)
 
 const down = (i: number, e: MouseEvent | TouchEvent) => {
   if (store.isRunning) return
@@ -111,16 +150,12 @@ function move(e: MouseEvent | TouchEvent) {
   let col = Math.max(0, Math.min(props.cols - 1, Math.floor(internalX / cellW.value)))
   let row = Math.max(0, Math.min(props.rows, Math.round(internalY / cellH.value)))
 
-  // --- HORIZONTAL CONSTRAINTS ONLY ---
+  // Each point can't go further than its neighbors
   if (dragging.value === 0) {
-    // Start Point: cannot move to or past Peak Point's column
     col = Math.min(col, p1.col - 1)
   } else if (dragging.value === 1) {
-    // Peak Point: must stay between Start and End columns
     col = Math.max(p0.col + 1, Math.min(col, p2.col - 1))
-    // Note: row is not limited here, so it can be lower or higher than p0/p2
   } else if (dragging.value === 2) {
-    // End Point: cannot move to or before Peak Point's column
     col = Math.max(col, p1.col + 1)
   }
 
@@ -137,46 +172,6 @@ function move(e: MouseEvent | TouchEvent) {
 const svgPt = (p: GridPoint) => ({
   x: p.col * cellW.value,
   y: p.row * cellH.value
-})
-
-const draggedPointPos = computed(() => {
-  if (dragging.value === null) return null
-  const pt = points.value[dragging.value]
-  // Fix: Type narrowing for svgPt
-  if (!pt) return null
-  return svgPt(pt)
-})
-
-const segments = computed(() => {
-  const p0 = points.value[0]
-  const p1 = points.value[1]
-  const p2 = points.value[2]
-  if (!p0 || !p1 || !p2) return []
-
-  const pt0 = svgPt(p0)
-  const pt1 = svgPt(p1)
-  const pt2 = svgPt(p2)
-
-  return [
-    { x1: 0, y1: pt0.y, x2: pt0.x, y2: pt0.y },
-    { x1: pt0.x, y1: pt0.y, x2: pt1.x, y2: pt1.y },
-    { x1: pt1.x, y1: pt1.y, x2: pt2.x, y2: pt2.y },
-    { x1: pt2.x, y1: pt2.y, x2: w.value, y2: pt2.y }
-  ]
-})
-
-const playheadX = computed(() => {
-  const bar =
-    typeof props.playheadBar === 'object' ? props.playheadBar.value : props.playheadBar
-  if (bar === null || bar === undefined) return 0
-  return Math.max(0, Math.min(w.value, (bar / store.config.barsPerCell) * cellW.value))
-})
-
-const currentCol = computed(() => {
-  const bar =
-    typeof props.playheadBar === 'object' ? props.playheadBar.value : props.playheadBar
-  if (bar === null || bar === undefined) return null
-  return Math.min(props.cols - 1, Math.floor(bar / store.config.barsPerCell))
 })
 </script>
 

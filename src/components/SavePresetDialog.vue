@@ -43,17 +43,15 @@ const openConfirmOverwrite = (preset: any, index: number) => {
       }
     },
     data: {
-      // Updated data structure
       message: `Are you sure you want to overwrite <span class="text-white font-bold">"${preset.name}"</span> with your current settings?`,
       confirmLabel: 'Confirm Overwrite',
       confirmSeverity: 'danger'
     },
     onClose: opt => {
       if (opt?.data?.confirmed) {
-        // Update the specific preset in the list
         presets.value[index] = {
           ...store.config,
-          name: preset.name, // Keep the old name
+          name: preset.name,
           points: JSON.parse(JSON.stringify(store.config.points))
         }
         saveToStorage()

@@ -13,6 +13,17 @@ const installPrompt = ref<any>(null)
 const store = useMetronomeStore()
 const engine = useMetronomeEngine()
 
+// This will be used for showing the "install for offline use" banner
+onMounted(() => {
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault()
+    installPrompt.value = e
+  })
+})
+
+// ----------------------------------------
+// start
+// ----------------------------------------
 function start() {
   store.isRunning = true
   engine.start(
@@ -23,20 +34,17 @@ function start() {
   )
 }
 
+// ----------------------------------------
+// stop
+// ----------------------------------------
 function stop() {
   engine.stop()
   store.isRunning = false
 }
 
-onMounted(() => {
-  window.addEventListener('beforeinstallprompt', e => {
-    // Prevent the default mini-infobar from appearing on mobile
-    e.preventDefault()
-    // Stash the event so it can be triggered later
-    installPrompt.value = e
-  })
-})
-
+// ----------------------------------------
+// handleInstall
+// ----------------------------------------
 async function handleInstall() {
   if (!installPrompt.value) return
 
@@ -45,9 +53,11 @@ async function handleInstall() {
 
   // Wait for the user to respond to the prompt
   const { outcome } = await installPrompt.value.userChoice
+
   if (outcome === 'accepted') {
     console.log('User installed the PWA')
   }
+
   installPrompt.value = null
 }
 </script>
