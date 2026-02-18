@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import SettingsModal from './SettingsModal.vue'
+import SettingsDialog from './SettingsDialog.vue'
 import { Icon } from '@iconify/vue'
 import { useDialog } from 'primevue/usedialog'
 import MyButton from './MyButton.vue'
 import { useMetronomeStore } from '../stores/useMetronomeStore'
 import InfoModal from './InfoModal.vue'
+import PresetsDialog from './PresetsDialog.vue'
 
 const menuVisible = ref(false)
 const containerRef = ref<HTMLElement | null>(null)
@@ -27,8 +28,8 @@ onUnmounted(() => window.removeEventListener('mousedown', handleClickOutside))
 
 const dialog = useDialog()
 
-const handleShowSettingsModal = () => {
-  dialog.open(SettingsModal, {
+const handleShowSettingsDialog = () => {
+  dialog.open(SettingsDialog, {
     props: {
       dismissableMask: true,
       header: 'Settings',
@@ -46,12 +47,26 @@ const handleShowInfoModal = () => {
     }
   })
 }
+
+const handleShowPresetsModal = () => {
+  dialog.open(PresetsDialog, {
+    props: {
+      dismissableMask: true,
+      header: 'Saved Presets',
+      modal: true,
+      style: {
+        width: '90vw',
+        maxWidth: '24rem'
+      }
+    }
+  })
+}
 </script>
 
 <template>
   <div
     ref="containerRef"
-    class="flex flex-col gap-3 p-4 pl-2.5 relative z-50 bg-zinc-800 rounded-t-lg"
+    class="flex flex-col gap-3 p-4 pl-2.5 relative z-50 rounded-t-lg"
   >
     <div class="flex justify-between items-center">
       <div class="flex items-center gap-2">
@@ -63,14 +78,15 @@ const handleShowInfoModal = () => {
       </div>
 
       <div class="flex gap-2.5">
-        <!-- <MyButton
-          icon="solar:refresh-linear"
+        <MyButton
+          v-tooltip.bottom="'Presets'"
+          icon="solar:library-linear"
           severity="secondary"
           :disabled="store.isRunning"
-          @click="store.reset"
-        /> -->
-
+          @click="handleShowPresetsModal"
+        />
         <MyButton
+          v-tooltip.bottom="'Info'"
           icon="solar:info-circle-linear"
           severity="secondary"
           :disabled="store.isRunning"
@@ -78,10 +94,11 @@ const handleShowInfoModal = () => {
         />
 
         <MyButton
+          v-tooltip.bottom="'Settings'"
           icon="solar:settings-linear"
           severity="secondary"
           :disabled="store.isRunning"
-          @click="handleShowSettingsModal"
+          @click="handleShowSettingsDialog"
         />
       </div>
     </div>

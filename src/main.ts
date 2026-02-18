@@ -35,12 +35,11 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(PrimeVue, {
   ripple: true,
-  // unstyled: true
-
   theme: {
     preset: MyPreset
   }
 })
+
 app.use(DialogService)
 
 app.mount('#app')

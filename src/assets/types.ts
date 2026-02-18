@@ -7,7 +7,7 @@ export interface TempoPoint {
 
 export interface MetronomeConfig {
   startBpm: number
-  maxBpm: number
+  peakBpm: number
   endBpm: number
   stopAtEnd: boolean
   barsPerCell: number

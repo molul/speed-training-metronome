@@ -2,50 +2,136 @@
 
 <template>
   <div
-    class="flex flex-col gap-2 bg-zinc-900/50 rounded-xl text-zinc-300 text-sm leading-relaxed shadow-inner max-w-sm"
+    class="flex flex-col gap-5 rounded-xl text-zinc-200 text-sm leading-relaxed shadow-inner max-w-sm"
   >
-    <h3 class="text-white font-bold text-base">The Philosophy</h3>
-    <p class="">
-      To acquire speed, you shouldn't just play at a fixed tempo. True progress happens
-      when you stretch your nervous system to its limit and then "settle" into a new,
-      faster comfort zone.
-    </p>
+    <section class="flex flex-col gap-3">
+      <h3 class="text-white font-bold text-base">The Philosophy</h3>
+      <p class="">
+        To acquire speed, you shouldn't just play at a fixed tempo. True progress happens
+        when you stretch your nervous system to its limit and then "settle" into a new,
+        faster comfort zone.
+      </p>
 
-    <div class="flex flex-col gap-4 ">
-      <div class="bg-zinc-800/50 p-3 rounded-lg border-l-4 border-green-500">
-        <div class="text-green-400 font-bold text-xs mb-1 uppercase tracking-wider">
-          Step 1: Start
+      <div class="flex flex-col gap-4">
+        <div class="bg-zinc-800/50 p-3 rounded-lg border-l-4 border-green-500">
+          <div class="text-green-400 font-bold text-xs mb-1 uppercase tracking-wider">
+            Step 1: Start
+          </div>
+          <div class="text-white font-semibold mb-1 italic text-xs">
+            Slow & Controlled
+          </div>
+          <p class="text-xs text-zinc-200">
+            Establish perfect accuracy and muscle memory at a comfortable baseline.
+          </p>
         </div>
-        <div class="text-white font-semibold mb-1 italic text-xs">Slow & Controlled</div>
-        <p class="text-xs text-zinc-400">
-          Establish perfect accuracy and muscle memory at a comfortable baseline.
-        </p>
-      </div>
 
-      <div class="bg-zinc-800/50 p-3 rounded-lg border-l-4 border-red-500">
-        <div class="text-red-400 font-bold text-xs mb-1 uppercase tracking-wider">
-          Step 2: Peak
+        <div class="bg-zinc-800/50 p-3 rounded-lg border-l-4 border-red-500">
+          <div class="text-red-400 font-bold text-xs mb-1 uppercase tracking-wider">
+            Step 2: Peak
+          </div>
+          <div class="text-white font-semibold mb-1 italic text-xs">
+            Pushing the Limit
+          </div>
+          <p class="text-xs text-zinc-200">
+            Ramp up to a tempo that challenges your top speed to "shock" your physical
+            limits.
+          </p>
         </div>
-        <div class="text-white font-semibold mb-1 italic text-xs">Pushing the Limit</div>
-        <p class="text-xs text-zinc-400">
-          Ramp up to a tempo that challenges your top speed to "shock" your physical
-          limits.
-        </p>
-      </div>
 
-      <div class="bg-zinc-800/50 p-3 rounded-lg border-l-4 border-yellow-500">
-        <div class="text-yellow-400 font-bold text-xs mb-1 uppercase tracking-wider">
-          Step 3: Settle
+        <div class="bg-zinc-800/50 p-3 rounded-lg border-l-4 border-yellow-500">
+          <div class="text-yellow-400 font-bold text-xs mb-1 uppercase tracking-wider">
+            Step 3: Settle
+          </div>
+          <div class="text-white font-semibold mb-1 italic text-xs">The New Normal</div>
+          <p class="text-xs text-zinc-200">
+            Landing at an intermediate speed that is faster than where you started.
+          </p>
         </div>
-        <div class="text-white font-semibold mb-1 italic text-xs">The New Normal</div>
-        <p class="text-xs text-zinc-400">
-          Landing at an intermediate speed that is faster than where you started.
-        </p>
       </div>
-    </div>
+    </section>
 
-    <p class="mt-6 text-xs text-zinc-500 italic text-center">
-      "Speed is a byproduct of accuracy, stretched by intensity."
-    </p>
+    <hr class="border-zinc-800" />
+
+    <section class="flex flex-col gap-3">
+      <h3 class="text-white font-bold text-base flex items-center gap-2">
+        Settings Guide
+      </h3>
+
+      <div class="grid gap-4">
+        <div>
+          <span class="text-zinc-100 font-semibold block mb-1">Tempo Points</span>
+          <p class="text-zinc-200 text-xs leading-normal">
+            Adjust the <span class="text-green-500">Start</span>,
+            <span class="text-red-500">Peak</span>, and
+            <span class="text-yellow-500">End</span> BPM directly on the grid or via
+            settings to shape the ramp.
+          </p>
+        </div>
+
+        <div>
+          <span class="text-zinc-100 font-semibold block mb-1">Bars Per Cell</span>
+          <p class="text-zinc-200 text-xs leading-normal">
+            Determines the "length" of each horizontal block. Increasing this makes the
+            total exercise longer.
+          </p>
+        </div>
+
+        <div>
+          <span class="text-zinc-100 font-semibold block mb-1">Increase Tempo</span>
+          <div class="flex flex-col gap-1.5 mt-1 text-xs">
+            <div class="">
+              <span class="font-semibold text-blue-200 whitespace-nowrap">
+                Every bar:
+              </span>
+
+              <span class="">
+                Changes BPM only when moving to a new cell (Stepped).
+              </span>
+            </div>
+            <div class="">
+              <span class="font-semibold text-blue-200 whitespace-nowrap">
+                Every cell:
+              </span>
+
+              <span class="">Recalculates BPM every single bar (Smooth ramp).</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-2">
+          <div>
+            <span class="text-zinc-100 font-semibold block">Stop at End</span>
+            <p class="text-xs">
+              When enabled, the metronome will automatically stop once the playhead
+              reaches the end of the 16th cell.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <hr class="border-zinc-800" />
+
+    <section class="flex flex-col gap-3">
+      <h3 class="text-white font-bold text-base">Presets Management</h3>
+      <p class="text-zinc-200">
+        In the header, you will find a
+        <span class="text-white font-semibold italic">Presets</span> button. This opens a
+        manager where you can:
+      </p>
+      <ul class="list-disc list-inside flex flex-col gap-2 text-zinc-200">
+        <li>
+          <span class="text-white font-medium">Load:</span> Switch between your saved ramp
+          configurations.
+        </li>
+        <li>
+          <span class="text-white font-medium">Rename:</span> Personalize your presets for
+          specific exercises.
+        </li>
+        <li>
+          <span class="text-white font-medium">Delete:</span> Remove configurations you no
+          longer need.
+        </li>
+      </ul>
+    </section>
   </div>
 </template>

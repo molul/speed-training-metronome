@@ -16,6 +16,8 @@ declare module 'vue' {
     Checkbox: typeof import('primevue/checkbox')['default']
     CheckboxControl: typeof import('./src/components/CheckboxControl.vue')['default']
     CheckBoxControl: typeof import('./src/components/CheckBoxControl.vue')['default']
+    ConfirmDialog: typeof import('./src/components/ConfirmDialog.vue')['default']
+    ConfirmOverwriteDialog: typeof import('./src/components/ConfirmOverwriteDialog.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     InfoModal: typeof import('./src/components/InfoModal.vue')['default']
     Label: typeof import('./src/components/Label.vue')['default']
@@ -25,12 +27,19 @@ declare module 'vue' {
     MetronomeSection: typeof import('./src/components/MetronomeSection.vue')['default']
     MetronomeTempos: typeof import('./src/components/MetronomeTempos.vue')['default']
     MyButton: typeof import('./src/components/MyButton.vue')['default']
+    PresetsDialog: typeof import('./src/components/PresetsDialog.vue')['default']
+    PresetsModal: typeof import('./src/components/PresetsModal.vue')['default']
+    SavePresetDialog: typeof import('./src/components/SavePresetDialog.vue')['default']
     Select: typeof import('primevue/select')['default']
     SelectButton: typeof import('primevue/selectbutton')['default']
     SelectButtonControl: typeof import('./src/components/SelectButtonControl.vue')['default']
+    SettingsDialog: typeof import('./src/components/SettingsDialog.vue')['default']
     SettingsModal: typeof import('./src/components/SettingsModal.vue')['default']
     Slider: typeof import('primevue/slider')['default']
     SliderControl: typeof import('./src/components/SliderControl.vue')['default']
     TempoVariables: typeof import('./src/components/TempoVariables.vue')['default']
+  }
+  export interface GlobalDirectives {
+    Tooltip: typeof import('primevue/tooltip')['default']
   }
 }

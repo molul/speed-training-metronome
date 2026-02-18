@@ -27,11 +27,11 @@ function stop() {
 
 <template>
   <div
-    class="size-full lg:h-auto mx-auto lg:rounded-lg flex flex-col gap-0 bg-zinc-800 relative p-0 lg:border border-zinc-700 shadow-md"
+    class="size-full lg:h-auto mx-auto lg:rounded-lg flex flex-col gap-0 relative p-0 lg:border border-zinc-700 shadow-md"
   >
     <Header />
 
-    <div class="flex flex-col gap-4 w-full">
+    <div class="flex flex-col gap-3 w-full">
       <BeatIndicator />
 
       <MetronomeSection :cols="16" :rows="37" :playhead-bar="store.visualBar" />

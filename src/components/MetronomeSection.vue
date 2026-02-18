@@ -180,9 +180,7 @@ const currentCol = computed(() => {
 
     <MetronomeTempos :height="h" />
 
-    <div class="w-full "
-:style="{transform: 'translateY('+cellH/2+'px)'}"
->
+    <div class="w-full" :style="{ transform: 'translateY(' + cellH / 2 + 'px)' }">
       <svg
         :width="w"
         :height="h"
@@ -191,7 +189,7 @@ const currentCol = computed(() => {
         @mouseleave="up"
         @touchmove.prevent="move"
         @touchend="up"
-        class="w-full overflow-visible select-none touch-none bg-zinc-700"
+        class="w-full overflow-visible select-none touch-none bg-zinc-800"
       >
         <g class="stroke-zinc-500">
           <line

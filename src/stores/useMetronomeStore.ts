@@ -20,15 +20,15 @@ export const useMetronomeStore = defineStore('metronome', () => {
 
   const defaultConfig = {
     startBpm: 100,
-    maxBpm: 160,
+    peakBpm: 160,
     endBpm: 115,
     stopAtEnd: true,
     barsPerCell: 1,
     tempoStep: 'cell' as TempoStep,
     points: [
       { bar: 0, bpm: 100 },
-      { bar: 8, bpm: 140 },
-      { bar: 12, bpm: 115 }
+      { bar: 8, bpm: 160 },
+      { bar: 12, bpm: 130 }
     ] as [TempoPoint, TempoPoint, TempoPoint]
   }
 
@@ -58,7 +58,7 @@ export const useMetronomeStore = defineStore('metronome', () => {
   function updatePoints(p: [TempoPoint, TempoPoint, TempoPoint]) {
     config.points = p
     config.startBpm = p[0].bpm
-    config.maxBpm = p[1].bpm
+    config.peakBpm = p[1].bpm
     config.endBpm = p[2].bpm
   }
 
@@ -70,7 +70,7 @@ export const useMetronomeStore = defineStore('metronome', () => {
     }
 
     config.startBpm = p.startBpm
-    config.maxBpm = p.maxBpm
+    config.peakBpm = p.peakBpm
     config.endBpm = p.endBpm
     config.stopAtEnd = p.stopAtEnd
     config.barsPerCell = p.barsPerCell
@@ -79,22 +79,22 @@ export const useMetronomeStore = defineStore('metronome', () => {
 
   function reset() {
     config.startBpm = 100
-    config.maxBpm = 160
+    config.peakBpm = 160
     config.endBpm = 130
     config.stopAtEnd = false
     config.barsPerCell = 1
     config.tempoStep = 'bar'
     config.points = [
       { bar: 0, bpm: 100 },
-      { bar: 8, bpm: 140 },
-      { bar: 12, bpm: 115 }
+      { bar: 8, bpm: 160 },
+      { bar: 12, bpm: 130 }
     ]
   }
 
   // 5. Watchers
   // Sync BPM changes (from buttons/inputs) to the points array
   watch(
-    [() => config.startBpm, () => config.maxBpm, () => config.endBpm],
+    [() => config.startBpm, () => config.peakBpm, () => config.endBpm],
     ([s, m, e]) => {
       config.points[0].bpm = s
       config.points[1].bpm = m
