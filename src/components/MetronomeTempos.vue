@@ -8,7 +8,7 @@ const store = useMetronomeStore()
 <template>
   <div class="flex flex-col select-none z-10 -translate-x-[2px]">
     <div
-      v-for="r in store.rows"
+      v-for="r in store.rows +1"
       :key="r"
       class="text-[11px] text-white flex items-end justify-end pr-0.5 border-b border-zinc-500 relative leading-none font-semibold"
       :style="{
