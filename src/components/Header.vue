@@ -83,7 +83,7 @@ const handleShowPresetsModal = () => {
       <div class="flex items-center gap-2">
         <Icon icon="mdi:metronome" class="size-8" />
         <span class="text-lg font-bold text-left leading-none">
-          SPEED BUILDER <br />
+          SPEED TRAINING <br />
           METRONOME
         </span>
       </div>

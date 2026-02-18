@@ -1,5 +1,5 @@
 {
-  "name": "Speed Builder Metronome",
+  "name": "Speed Training Metronome",
   "short_name": "Metronome",
   "description": "A precision tempo ramp metronome for musicians.",
   "start_url": "/",
@@ -38,14 +38,14 @@
       "sizes": "750x1334",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "Speed Builder Metronome on Mobile"
+      "label": "Speed Training Metronome on Mobile"
     },
     {
       "src": "screenshot-desktop.png",
       "sizes": "1920x1080",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Speed Builder Metronome on Desktop"
+      "label": "Speed Training Metronome on Desktop"
     }
   ]
 }
