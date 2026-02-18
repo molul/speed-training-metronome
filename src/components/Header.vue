@@ -90,13 +90,6 @@ const handleShowPresetsModal = () => {
 
       <div class="flex gap-2.5">
         <MyButton
-          v-tooltip.bottom="'Presets'"
-          icon="solar:library-linear"
-          severity="secondary"
-          :disabled="store.isRunning"
-          @click="handleShowPresetsModal"
-        />
-        <MyButton
           v-tooltip.bottom="'Info'"
           icon="solar:info-circle-linear"
           severity="secondary"
@@ -104,6 +97,14 @@ const handleShowPresetsModal = () => {
           @click="handleShowInfoModal"
         />
 
+        <MyButton
+          v-tooltip.bottom="'Presets'"
+          icon="solar:library-linear"
+          severity="secondary"
+          :disabled="store.isRunning"
+          @click="handleShowPresetsModal"
+        />
+        
         <MyButton
           v-tooltip.bottom="'Settings'"
           icon="solar:settings-linear"
