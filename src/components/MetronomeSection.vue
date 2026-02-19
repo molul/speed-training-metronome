@@ -103,7 +103,7 @@ watch(() => store.config.points, syncPointsFromStore, {
   immediate: true
 })
 
-const down = (i: number, e: MouseEvent | TouchEvent) => {
+const down = (i: number) => {
   if (store.isRunning) return
 
   dragging.value = i
@@ -284,8 +284,8 @@ const svgPt = (p: GridPoint) => ({
               ? 'fill-red-400'
               : 'fill-yellow-400'
           ]"
-          @mousedown="down(i, $event)"
-          @touchstart.prevent="down(i, $event)"
+          @mousedown="down(i)"
+          @touchstart.prevent="down(i)"
         />
       </svg>
     </div>
