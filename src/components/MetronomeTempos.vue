@@ -21,8 +21,8 @@ const getRowBgClass = (rowIndex: number) => {
     <div
       v-for="r in store.rows + 1"
       :key="r"
-      class="text-[11px] text-white flex items-end justify-end pr-0.5 relative font-semibold leading-tight"
-      :style="{ width: '30px', height: height / store.rows + 'px' }"
+      class="text-[11px] text-white flex items-center justify-end pr-0.5 relative font-semibold leading-tight"
+      :style="{ width: '24px', height: height / store.rows + 'px' }"
     >
       <div class="absolute top-0 left-0 size-full z-0" :class="getRowBgClass(r - 1)" />
 
