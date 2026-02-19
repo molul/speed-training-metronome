@@ -36,7 +36,7 @@ const handleDelete = (index: number) => {
       }
     },
     data: {
-      message: `Are you sure you want to delete <span class="text-white font-bold">"${presetName}"</span>? This action cannot be undone.`,
+      message: `Are you sure you want to delete <span class="dark:text-white font-bold">"${presetName}"</span>? This action cannot be undone.`,
       confirmLabel: 'Delete Preset',
       confirmSeverity: 'danger'
     },
@@ -63,7 +63,7 @@ const handleDelete = (index: number) => {
       <div
         v-for="(p, i) in presets"
         :key="i"
-        class="flex items-center justify-between p-3 rounded-md bg-zinc-300/50 dark:bg-zinc-800/50 hover:bg-zinc-400/50 dark:hover:bg-zinc-800 transition-colors"
+        class="flex items-center justify-between p-3 rounded-md bg-zinc-100 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
       >
         <span class="font-medium text-zinc-900 dark:text-white truncate mr-4">{{
           p.name

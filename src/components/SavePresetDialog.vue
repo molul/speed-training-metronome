@@ -43,7 +43,7 @@ const openConfirmOverwrite = (preset: any, index: number) => {
       }
     },
     data: {
-      message: `Are you sure you want to overwrite <span class="text-white font-bold">"${preset.name}"</span> with your current settings?`,
+      message: `Are you sure you want to overwrite <span class="dark:text-white font-bold">"${preset.name}"</span> with your current settings?`,
       confirmLabel: 'Confirm Overwrite',
       confirmSeverity: 'danger'
     },
@@ -91,7 +91,7 @@ const saveToStorage = () => {
       >
       <div
         v-if="presets.length === 0"
-        class="text-zinc-600 dark:text-zinc-500 italic text-xs py-4 text-center"
+        class="text-zinc-600 dark:text-zinc-500 italic text-sm py-4 text-center"
       >
         No presets saved yet.
       </div>

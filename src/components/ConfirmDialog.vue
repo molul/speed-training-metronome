@@ -13,7 +13,7 @@ const close = (confirmed: boolean) => {
 
 <template>
   <div class="flex flex-col gap-6">
-    <p class="text-zinc-300 leading-normal" v-html="message"></p>
+    <p class="dark:text-zinc-300 leading-normal" v-html="message"></p>
 
     <div class="flex flex-col gap-3 justify-end">
       <MyButton
