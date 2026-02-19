@@ -15,9 +15,61 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: 'autoUpdate',
-      manifest: {
-        // ... include your manifest settings here
-      }
+      manifest: 
+
+{
+  "name": "Speed Training Metronome",
+  "short_name": "Metronome",
+  "description": "A precision tempo ramp metronome for musicians.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#18181b",
+  "theme_color": "#18181b",
+  "icons": [
+    {
+      "src": "icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "metronome-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-mobile.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Speed Training Metronome on Mobile"
+    },
+    {
+      "src": "screenshot-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Speed Training Metronome on Desktop"
+    }
+  ]
+}
+
+
     })
   ],
   resolve: {
