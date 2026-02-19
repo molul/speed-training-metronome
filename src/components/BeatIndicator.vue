@@ -21,7 +21,7 @@ const currentBeatInBar = computed(() => {
           {
             'bg-green-500 dark:bg-green-400 border-green-700 dark:border-green-500':
               currentBeatInBar === i - 1,
-            'bg-zinc-400 dark:bg-zinc-700 border-zinc-500 dark:border-zinc-600':
+            'bg-zinc-300 dark:bg-zinc-700 border-zinc-400 dark:border-zinc-600':
               currentBeatInBar !== i - 1
           }
         ]"
