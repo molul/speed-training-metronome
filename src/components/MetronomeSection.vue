@@ -232,7 +232,7 @@ const svgPt = (p: GridPoint) => ({
           y="0"
           :width="cellW"
           :height="h"
-          class="fill-green-400/20 dark:fill-green-500/20"
+          class="fill-blue-400/30 dark:fill-blue-500/30"
         />
 
         <line
@@ -242,7 +242,7 @@ const svgPt = (p: GridPoint) => ({
           :x2="playheadX"
           :y2="h"
           stroke-width="2"
-          class="stroke-green-600 dark:stroke-green-500"
+          class="stroke-blue-600 dark:stroke-blue-500"
         />
 
         <line
