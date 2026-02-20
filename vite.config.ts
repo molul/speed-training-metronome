@@ -13,7 +13,9 @@ export default defineConfig({
     Components({
       resolvers: [PrimeVueResolver()]
     }),
-    VitePWA({
+    VitePWA(
+/*
+{
       registerType: 'autoUpdate',
       manifest: {
         name: 'Speed Training Metronome',
@@ -66,7 +68,9 @@ export default defineConfig({
           }
         ]
       }
-    })
+    }
+*/
+)
   ],
   resolve: {
     alias: {
