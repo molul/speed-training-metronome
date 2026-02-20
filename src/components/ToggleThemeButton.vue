@@ -32,6 +32,6 @@ severity="secondary"
     :full-width="true"
     label="Toggle theme"
     aria-label="Toggle theme"
-    :icon="isDark ? 'solar:moon-bold' : 'solar:sun-bold'"
+    :icon="!isDark ? 'solar:moon-bold' : 'solar:sun-bold'"
   />
 </template>
