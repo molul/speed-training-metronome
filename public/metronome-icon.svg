@@ -1,31 +1,11 @@
-<svg version="1.1"
-	 id="Capa_4__x2B__Capa_5_copia__x2B__Elipse_2__x2B__Elipse_1__x2B__Grupo_1_xA0_Imagen_00000173151659306323381600000003340356041171364262_"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
-	 style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#18181B;}
-	.st1{fill:none;stroke:#FFFFFF;stroke-width:14.1732;stroke-miterlimit:10;}
-	.st2{fill:#FFFFFF;}
-	.st3{fill:none;stroke:#00DB70;stroke-width:11.3386;stroke-miterlimit:10;}
-	.st4{fill:none;stroke:#FF575E;stroke-width:11.3386;stroke-miterlimit:10;}
-	.st5{fill:none;stroke:#FFBF00;stroke-width:11.3386;stroke-miterlimit:10;}
-	.st6{display:none;fill:#D844AA;}
-	.st7{display:none;opacity:0.46;fill:#FFFFFF;}
-</style>
-<rect class="st0" width="512" height="512"/>
-<line class="st1" x1="264.19" y1="303.77" x2="304.75" y2="251.09"/>
-<line class="st1" x1="348.39" y1="266.99" x2="324.82" y2="247.75"/>
-<path class="st2" d="M331.09,277.87c-0.74-1.2-6.51-8.84-14.1-8.84c-2.65,0-7.88,5.51-9.02,9.05c0,1.5,8.99,36,8.99,36h-31.82
-	c-0.05,15.96-13,28.88-28.98,28.88c-15.97,0-28.92-12.92-28.98-28.88h-31.59l40.52-152.27h39.83l15.5,57.55
-	c4.68-6.59,13.08-11.92,21.55-11.13c-9.9-35.79-17.91-64.23-17.91-64.23s-8.45-7.94-38.83-7.94c-30.38,0-39.12,7.94-39.12,7.94
-	S162,339.64,162,350.36c0,12.58,7.77,19.65,19.13,22.68c0,0,140.54,0,149.95,0s18.99-11.7,18.99-22.68
-	C350.08,346.06,341.36,315.95,331.09,277.87z"/>
-<circle class="st3" cx="256.25" cy="314.08" r="15.29"/>
-<circle class="st4" cx="314.08" cy="238.98" r="15.29"/>
-<circle class="st5" cx="361.98" cy="278.08" r="15.29"/>
-<circle class="st6" cx="256.04" cy="182.57" r="8.52"/>
-<circle class="st2" cx="256.25" cy="181.98" r="8.31"/>
-<path class="st7" d="M291.44,219.37l16.1,59.76c1.59-3.89,3.47-7.63,6.46-9.13c4.92-1.64,12.24,0.91,17.36,5.36
-	c-5.94-22.02-12.49-45.87-18.37-67.13C304.52,207.45,296.12,212.78,291.44,219.37z"/>
-<polygon class="st2" points="254.17,284.96 247.94,284.96 247.94,181.98 264.56,181.98 264.56,272.08 "/>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve">
+  <rect fill="#18181B" width="512" height="512"/>
+  <line fill="none" stroke="#FFFFFF" stroke-width="14.1732" stroke-miterlimit="10" x1="264.19" y1="303.77" x2="304.75" y2="251.09"/>
+  <line fill="none" stroke="#FFFFFF" stroke-width="14.1732" stroke-miterlimit="10" x1="348.39" y1="266.99" x2="324.82" y2="247.75"/>
+  <path fill="#FFFFFF" d="M331.09,277.87c-0.74-1.2-6.51-8.84-14.1-8.84c-2.65,0-7.88,5.51-9.02,9.05c0,1.5,8.99,36,8.99,36h-31.82 c-0.05,15.96-13,28.88-28.98,28.88c-15.97,0-28.92-12.92-28.98-28.88h-31.59l40.52-152.27h39.83l15.5,57.55 c4.68-6.59,13.08-11.92,21.55-11.13c-9.9-35.79-17.91-64.23-17.91-64.23s-8.45-7.94-38.83-7.94c-30.38,0-39.12,7.94-39.12,7.94 S162,339.64,162,350.36c0,12.58,7.77,19.65,19.13,22.68c0,0,140.54,0,149.95,0s18.99-11.7,18.99-22.68 C350.08,346.06,341.36,315.95,331.09,277.87z"/>
+  <circle fill="none" stroke="#00DB70" stroke-width="11.3386" stroke-miterlimit="10" cx="256.25" cy="314.08" r="15.29"/>
+  <circle fill="none" stroke="#FF575E" stroke-width="11.3386" stroke-miterlimit="10" cx="314.08" cy="238.98" r="15.29"/>
+  <circle fill="none" stroke="#FFBF00" stroke-width="11.3386" stroke-miterlimit="10" cx="361.98" cy="278.08" r="15.29"/>
+  <circle fill="#FFFFFF" cx="256.25" cy="181.98" r="8.31"/>
+  <polygon fill="#FFFFFF" points="254.17,284.96 247.94,284.96 247.94,181.98 264.56,181.98 264.56,272.08 "/>
 </svg>
