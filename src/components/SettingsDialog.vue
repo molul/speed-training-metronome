@@ -56,6 +56,20 @@ type BpmKey = keyof typeof labels
         :min="40"
         :max="225"
         :step="5"
+        :external-min="
+          key === 'peakBpm'
+            ? store.config.endBpm
+            : key === 'endBpm'
+            ? store.config.startBpm
+            : undefined
+        "
+        :external-max="
+          key === 'startBpm'
+            ? store.config.endBpm
+            : key === 'endBpm'
+            ? store.config.peakBpm
+            : undefined
+        "
       />
     </div>
 
