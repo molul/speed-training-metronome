@@ -14,7 +14,7 @@ export default defineConfig({
       resolvers: [PrimeVueResolver()]
     }),
     VitePWA(
-/*
+
 {
       registerType: 'autoUpdate',
       manifest: {
@@ -24,7 +24,7 @@ export default defineConfig({
         start_url: '/',
         display: 'standalone',
         background_color: '#18181b',
-        theme_color: '#2b7fff',
+        theme_color: '#f00',
         icons: [
           {
             src: 'icon-512x512.png',
@@ -69,7 +69,7 @@ export default defineConfig({
         ]
       }
     }
-*/
+
 )
   ],
   resolve: {
