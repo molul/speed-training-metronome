@@ -28,7 +28,6 @@ onMounted(() => {
   <MyButton
     @click="toggleTheme"
 severity="secondary"
-    class="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-100 transition-colors border border-zinc-300 dark:border-zinc-700 hover:scale-105 active:scale-95"
     :full-width="true"
     label="Toggle theme"
     aria-label="Toggle theme"
