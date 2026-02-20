@@ -100,7 +100,7 @@ const saveToStorage = () => {
           v-for="(p, i) in presets"
           :key="i"
           @click="openConfirmOverwrite(p, i)"
-          class="text-sm flex items-center justify-between p-3 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-md transition-colors text-left group cursor-pointer"
+          class="text-sm flex items-center justify-between px-4 py-3 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-md transition-colors text-left group cursor-pointer"
         >
           <span class="font-medium">{{ p.name }}</span>
           <span
