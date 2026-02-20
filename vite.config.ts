@@ -21,6 +21,7 @@ export default defineConfig({
         description: 'A precision tempo ramp metronome for musicians.',
         start_url: '/',
         display: 'standalone',
+"orientation": "portrait",
         background_color: '#18181b',
         theme_color: '#18181b',
         icons: [
