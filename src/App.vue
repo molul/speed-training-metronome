@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Main from './components/Main.vue'
 import DynamicDialog from 'primevue/dynamicdialog'
+import { ref, onMounted } from 'vue'
 
 const isDark = ref(true)
 
