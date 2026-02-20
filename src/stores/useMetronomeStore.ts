@@ -24,7 +24,7 @@ export const useMetronomeStore = defineStore('metronome', () => {
     barsPerCell: 2,
     tempoStep: 'bar' as TempoStep,
     points: [
-      { bar: 2, bpm: 100 },
+      { bar: 1, bpm: 100 },
       { bar: 8, bpm: 160 },
       { bar: 12, bpm: 130 }
     ] as [TempoPoint, TempoPoint, TempoPoint]
@@ -79,7 +79,7 @@ export const useMetronomeStore = defineStore('metronome', () => {
     config.barsPerCell = 2
     config.tempoStep = 'bar'
     config.points = [
-      { bar: 2, bpm: 100 },
+      { bar: 1, bpm: 100 },
       { bar: 8, bpm: 160 },
       { bar: 12, bpm: 130 }
     ]
