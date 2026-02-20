@@ -17,7 +17,7 @@ const getRowBgClass = (rowIndex: number) => {
 </script>
 
 <template>
-  <div class="flex flex-col select-none z-10 -translate-x-[1px]">
+  <div class="flex flex-col select-none z-10 -translate-x-[0px]">
     <div
       v-for="r in store.rows + 1"
       :key="r"
