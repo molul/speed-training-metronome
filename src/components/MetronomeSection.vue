@@ -119,9 +119,63 @@ function up() {
   dragging.value = null
 }
 
+// function move(e: MouseEvent | TouchEvent) {
+//   if (store.isRunning || dragging.value === null || !container.value) return
+
+//   // DOn't scroll if dragging a point
+//   if (e.cancelable) {
+//     e.preventDefault()
+//   }
+
+//   const p0 = points.value[0]
+//   const p1 = points.value[1]
+//   const p2 = points.value[2]
+
+//   const svgEl = container.value.querySelector('svg')
+//   if (!svgEl || !p0 || !p1 || !p2) return
+
+//   const rect = svgEl.getBoundingClientRect()
+
+//   let clientX = 0
+//   let clientY = 0
+
+//   if ('touches' in e) {
+//     const touch = e.touches[0]
+//     if (!touch) return
+//     clientX = touch.clientX
+//     clientY = touch.clientY
+//   } else {
+//     clientX = (e as MouseEvent).clientX
+//     clientY = (e as MouseEvent).clientY
+//   }
+
+//   const internalX = ((clientX - rect.left) / rect.width) * w.value
+//   const internalY = ((clientY - rect.top) / rect.height) * h.value
+
+//   let col = Math.max(0, Math.min(props.cols - 1, Math.floor(internalX / cellW.value)))
+//   let row = Math.max(0, Math.min(props.rows, Math.round(internalY / cellH.value)))
+
+//   // Constraint Logic
+//   if (dragging.value === 0) {
+//     col = Math.min(col, p1.col - 1)
+//   } else if (dragging.value === 1) {
+//     col = Math.max(p0.col + 1, Math.min(col, p2.col - 1))
+//   } else if (dragging.value === 2) {
+//     col = Math.max(col, p1.col + 1)
+//   }
+
+//   points.value[dragging.value] = { col, row }
+
+//   store.updatePoints(
+//     points.value.map(p => ({
+//       bar: p.col,
+//       bpm: rowToBpm(p.row)
+//     })) as [TempoPoint, TempoPoint, TempoPoint]
+//   )
+// }
+
 function move(e: MouseEvent | TouchEvent) {
   if (store.isRunning || dragging.value === null || !container.value) return
-
   // DOn't scroll if dragging a point
   if (e.cancelable) {
     e.preventDefault()
@@ -133,7 +187,6 @@ function move(e: MouseEvent | TouchEvent) {
 
   const svgEl = container.value.querySelector('svg')
   if (!svgEl || !p0 || !p1 || !p2) return
-
   const rect = svgEl.getBoundingClientRect()
 
   let clientX = 0
@@ -149,29 +202,34 @@ function move(e: MouseEvent | TouchEvent) {
     clientY = (e as MouseEvent).clientY
   }
 
-  const internalX = ((clientX - rect.left) / rect.width) * w.value
-  const internalY = ((clientY - rect.top) / rect.height) * h.value
+  const relativeX = clientX - rect.left
+  const relativeY = clientY - rect.top
 
-  let col = Math.max(0, Math.min(props.cols - 1, Math.floor(internalX / cellW.value)))
-  let row = Math.max(0, Math.min(props.rows, Math.round(internalY / cellH.value)))
+  const internalX = (relativeX / rect.width) * w.value
+  const internalY = (relativeY / rect.height) * h.value
 
-  // Constraint Logic
+  let col = Math.floor(internalX / cellW.value)
+  let row = Math.round(internalY / cellH.value)
+
+  col = Math.max(0, Math.min(props.cols - 1, col))
+  row = Math.max(0, Math.min(props.rows, row))
+
   if (dragging.value === 0) {
     col = Math.min(col, p1.col - 1)
+    row = Math.max(p1.row, p2.row, row)
   } else if (dragging.value === 1) {
     col = Math.max(p0.col + 1, Math.min(col, p2.col - 1))
+    row = Math.min(row, p0.row, p2.row)
   } else if (dragging.value === 2) {
     col = Math.max(col, p1.col + 1)
+    row = Math.max(p1.row, Math.min(p0.row, row))
   }
 
-  points.value[dragging.value] = { col, row }
-
-  store.updatePoints(
-    points.value.map(p => ({
-      bar: p.col,
-      bpm: rowToBpm(p.row)
-    })) as [TempoPoint, TempoPoint, TempoPoint]
-  )
+  if (points.value[dragging.value])
+    points.value[dragging.value] = {
+      col,
+      row
+    }
 }
 
 const svgPt = (p: GridPoint) => ({
