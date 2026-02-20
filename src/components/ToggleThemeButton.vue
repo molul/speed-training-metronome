@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import MyButton from './MyButton.vue'
+import { ref, onMounted } from 'vue'
 
 const isDark = ref(true)
+
 
 const toggleTheme = () => {
   isDark.value = !isDark.value
@@ -14,6 +15,14 @@ const toggleTheme = () => {
     localStorage.setItem('theme', 'light')
   }
 }
+
+// Sync with saved preference on load
+onMounted(() => {
+  isDark.value =
+    document.documentElement.classList.contains('dark') ||
+    localStorage.getItem('theme') === 'dark'
+  
+})
 </script>
 
 <template>
