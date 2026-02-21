@@ -33,7 +33,7 @@ const getBeatClass = (index: number) => {
 
 <template>
   <div class="flex-1 flex flex-col gap-2 items-end h-15 justify-end">
-    <span class="text-4xl font-black font-mono leading-none translate-y-1">
+    <span class="text-4xl font-black font-monocode leading-none translate-y-1">
       {{ store.currentBpm }}
     </span>
 
