@@ -7,7 +7,6 @@ export interface TempoPoint {
   bpm: number
 }
 
-// Added the type for the new feature
 export type TempoStep = 'bar' | 'cell'
 
 export function useMetronomeEngine() {
@@ -129,11 +128,6 @@ export function useMetronomeEngine() {
           source.connect(ctx!.destination)
           source.start(nextBeatTime)
         }
-
-        // const source = ctx!.createBufferSource()
-        // source.buffer = store.beatInBar === 0 ? hiBuf! : loBuf!
-        // source.connect(ctx!.destination)
-        // source.start(nextBeatTime)
 
         if (store.beatInBar === 0) {
           store.visualBar = store.currentBar
