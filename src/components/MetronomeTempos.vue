@@ -39,7 +39,7 @@ v-for="bpmVarName in ['startBpm', 'peakBpm', 'endBpm']"
       <span
         :class="[
           'z-30 -translate-x-[1px] translate-y-[1px] font-bold font-monocode',
-          { 'text-white dark:text-zinc-900': getRowBgClass(r - 1) !== '' }
+          { 'text-white dark:text-zinc-900': [store.config. startBpm,store.config.peakBpm,store.config.endBpm]. includes(store.rowToBpm(r) + 5) }
         ]"
       >
         {{ store.rowToBpm(r) + 5 }}
