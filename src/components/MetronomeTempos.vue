@@ -32,7 +32,7 @@ const getRowBgClass = (bpmVarName: string, rowIndex: number) => {
 v-for="bpmVarName in ['startBpm', 'peakBpm', 'endBpm']"
 :key="bpmVarName"
         class="size-full z-0"
-        :class="getRowBgClass(r - 1)"
+        :class="getRowBgClass(bpmVarName, r - 1)"
       />
 
 
