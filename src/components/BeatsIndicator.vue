@@ -31,9 +31,15 @@ const getBeatClass = (index: number) => {
 
 <template>
   <div class="flex-1 flex flex-col gap-1.5 items-end justify-end">
+<div class="flex justify-between">
+<span class="text-4xl font-black font-monocode leading-none translate-y-1">
+     Bar: {{ store.currentBeat }}
+    </span>
+
     <span class="text-4xl font-black font-monocode leading-none translate-y-1">
       {{ store.currentBpm }}
     </span>
+</div>
 
     <div class="flex gap-2 flex-1 size-full">
       <div
