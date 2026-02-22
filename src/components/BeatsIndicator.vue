@@ -32,9 +32,9 @@ const getBeatClass = (index: number) => {
 <template>
   <div class="flex-1 flex flex-col gap-1.5 items-end justify-end">
 <!--
-<div class="flex justify-between">
+<div class="w-full flex justify-between text-4xl ">
 <span class="text-4xl font-black font-monocode leading-none translate-y-1">
-     Bar: {{ store.currentBar }}
+     Bar: {{ store.visualBar }}
     </span>
 -->
     <span class="text-4xl font-black font-monocode leading-none translate-y-1">
