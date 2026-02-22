@@ -34,7 +34,7 @@ v-for="bpmVarName in ['startBpm', 'peakBpm', 'endBpm']"
         class="size-full z-0"
         :class="getRowBgClass(bpmVarName, r - 1)"
       />
-
+</div>
 
       <span
         :class="[
