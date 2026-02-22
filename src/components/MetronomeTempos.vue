@@ -8,9 +8,9 @@ const getRowBgClass = (bpmVarName: string, rowIndex: number) => {
   const bpm = store.rowToBpm(rowIndex)
   const { startBpm, peakBpm, endBpm } = store.config
 
-  if (bpmVarName === 'startBpm' && bpm === startBpm) return 'bg-green-600 dark:bg-green-400'
-  if (bpmVarName === 'peakBpm' &&bpm === peakBpm) return 'bg-red-700 dark:bg-red-400'
-  if (bpmVarName === 'endBpm' &&bpm === endBpm) return 'bg-yellow-600 dark:bg-yellow-400'
+  if (bpmVarName === 'startBpm' &&  bpm === startBpm) return 'bg-green-600 dark:bg-green-400'
+  if (bpmVarName === 'peakBpm' && bpm === peakBpm) return 'bg-red-700 dark:bg-red-400'
+  if (bpmVarName === 'endBpm' && bpm === endBpm) return 'bg-yellow-600 dark:bg-yellow-400'
 
   return ''
 }
