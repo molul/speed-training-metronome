@@ -22,15 +22,15 @@ const getBeatClass = (index: number) => {
   }
 
   return [
-    'w-full h-4 border rounded-[3px] transition-all duration-150 cursor-pointer',
-    isActive ? 'scale-y-125 brightness-110 shadow-sm' : 'opacity-80',
+    'w-full h-3.5 border rounded-[3px] transition-all duration-150 cursor-pointer',
+    isActive ? 'scale-y-125 brightness-110 shadow-sm' : 'opacity-40',
     colors[type]
   ]
 }
 </script>
 
 <template>
-  <div class="flex-1 flex flex-col gap-2 items-end h-15 justify-end">
+  <div class="flex-1 flex flex-col gap-1.5 items-end justify-end">
     <span class="text-4xl font-black font-monocode leading-none translate-y-1">
       {{ store.currentBpm }}
     </span>
