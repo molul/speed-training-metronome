@@ -5,7 +5,7 @@ import { useMetronomeStore, type BeatType } from '../stores/useMetronomeStore'
 const store = useMetronomeStore()
 
 const currentBeatInBar = computed(() => {
-  return store.beatInBar === 0 ? store.config.beatsPerBar - 1 : store.beatInBar - 1
+  return store.isRunning ? store.beatInBar === 0 ? store.config.beatsPerBar - 1 : store.beatInBar - 1 : -1
 })
 
 const getBeatClass = (index: number) => {
