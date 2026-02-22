@@ -4,13 +4,13 @@ import { useMetronomeStore } from '../stores/useMetronomeStore'
 defineProps<{ height: number }>()
 const store = useMetronomeStore()
 
-const getRowBgClass = (rowIndex: number) => {
+const getRowBgClass = (bpmVarName: string, rowIndex: number) => {
   const bpm = store.rowToBpm(rowIndex)
   const { startBpm, peakBpm, endBpm } = store.config
 
-  if (bpm === startBpm) return 'bg-green-600 dark:bg-green-400'
-  if (bpm === peakBpm) return 'bg-red-700 dark:bg-red-400'
-  if (bpm === endBpm) return 'bg-yellow-600 dark:bg-yellow-400'
+  if (bpmVarName === 'startBpm' && bpm === startBpm) return 'bg-green-600 dark:bg-green-400'
+  if (bpmVarName === 'peakBpm' &&bpm === peakBpm) return 'bg-red-700 dark:bg-red-400'
+  if (bpmVarName === 'endBpm' &&bpm === endBpm) return 'bg-yellow-600 dark:bg-yellow-400'
 
   return ''
 }
@@ -27,10 +27,14 @@ const getRowBgClass = (rowIndex: number) => {
         height: height / store.rows + 'px'
       }"
     >
+<div class="size-full absolute top-0 left-0 flex gap-0 rounded-l-xs overflow-hidden">
       <div
-        class="absolute top-0 left-0 size-full z-0 rounded-l-xs"
+v-for="bpmVarName in ['startBpm', 'peakBpm', 'endBpm']"
+:key="bpmVarName"
+        class="size-full z-0"
         :class="getRowBgClass(r - 1)"
       />
+
 
       <span
         :class="[
