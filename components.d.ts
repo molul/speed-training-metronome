@@ -12,6 +12,9 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     BeatIndicator: typeof import('./src/components/BeatIndicator.vue')['default']
+    BeatIndicatorInfoDialog: typeof import('./src/components/BeatIndicatorInfoDialog.vue')['default']
+    BeatIndicatorItem: typeof import('./src/components/BeatIndicatorItem.vue')['default']
+    BeatsIndicator: typeof import('./src/components/BeatsIndicator.vue')['default']
     Button: typeof import('primevue/button')['default']
     Checkbox: typeof import('primevue/checkbox')['default']
     CheckboxControl: typeof import('./src/components/CheckboxControl.vue')['default']

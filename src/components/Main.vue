@@ -4,7 +4,7 @@ import { useMetronomeEngine } from '../composables/useMetronomeEngine'
 import { useMetronomeStore } from '../stores/useMetronomeStore'
 import MyButton from './MyButton.vue'
 import Header from './Header.vue'
-import BeatIndicator from './BeatIndicator.vue'
+import BeatsIndicator from './BeatsIndicator.vue'
 import Footer from './Footer.vue'
 import { Icon } from '@iconify/vue'
 import { ref, onMounted } from 'vue'
@@ -114,7 +114,7 @@ async function handleInstall() {
               @click="stop"
             />
 
-            <BeatIndicator />
+            <BeatsIndicator />
           </div>
 
           <Footer />

@@ -135,6 +135,35 @@
     <hr class="border-zinc-300 dark:border-zinc-700" />
 
     <section class="flex flex-col gap-3">
+      <h3 class="font-bold text-base flex items-center gap-2">Beat indicators</h3>
+
+      <div class="flex flex-col gap-3">
+        <span>
+          At the bottom of the screen, next to the Play/Stop button, there are visual
+          indicators for every beat. If you click/tap on them, you'll be able to select
+          the sound to be played on that beat (high or low), or mute it.
+        </span>
+
+        <div class="flex gap-2">
+          <div
+            v-for="(beatClasses, index) in [
+              'bg-orange-500 border-orange-600',
+              'bg-yellow-400 border-yellow-500',
+              'bg-orange-500 border-orange-600',
+              'bg-zinc-300 dark:bg-zinc-700 border-zinc-400 dark:border-zinc-800'
+            ]"
+            :key="`beatInfo-${index}`"
+            :class="['w-full h-4 border rounded-[3px] ', beatClasses]"
+          >
+            &nbsp;
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="border-zinc-300 dark:border-zinc-700" />
+
+    <section class="flex flex-col gap-3">
       <h3 class="font-bold text-base">Presets management</h3>
       <p class="">
         In the header, you will find a
