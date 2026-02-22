@@ -12,7 +12,7 @@ const getRowBgClass = (bpmVarName: string, rowIndex: number) => {
   if (bpmVarName === 'peakBpm' && bpm === peakBpm) return 'bg-red-700 dark:bg-red-400'
   if (bpmVarName === 'endBpm' && bpm === endBpm) return 'bg-yellow-600 dark:bg-yellow-400'
 
-  return ''
+  return 'hidden'
 }
 </script>
 
