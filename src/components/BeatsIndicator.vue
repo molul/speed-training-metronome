@@ -5,7 +5,11 @@ import { useMetronomeStore, type BeatType } from '../stores/useMetronomeStore'
 const store = useMetronomeStore()
 
 const currentBeatInBar = computed(() => {
-  return store.isRunning ? store.beatInBar === 0 ? store.config.beatsPerBar - 1 : store.beatInBar - 1 : -1
+  return store.isRunning
+    ? store.beatInBar === 0
+      ? store.config.beatsPerBar - 1
+      : store.beatInBar - 1
+    : -1
 })
 
 const getBeatClass = (index: number) => {
@@ -31,18 +35,9 @@ const getBeatClass = (index: number) => {
 
 <template>
   <div class="flex-1 flex flex-col gap-1.5 items-end justify-end">
-<!--
-<div class="w-full flex justify-between text-4xl ">
-<span class="text-4xl font-black font-monocode leading-none translate-y-1">
-     Bar: {{ store.visualBar }}
-    </span>
--->
     <span class="text-4xl font-black font-monocode leading-none translate-y-1">
       {{ store.currentBpm }}
     </span>
-<!--
-</div>
--->
 
     <div class="flex gap-2 flex-1 size-full">
       <div

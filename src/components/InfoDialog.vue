@@ -144,27 +144,28 @@
           the sound to be played on that beat (high or low), or mute it.
         </span>
 
-        <div class="flex gap-2">
-          <div
-            v-for="(beatClasses, index) in [
-              'bg-orange-500 border-orange-600',
-              'bg-yellow-400 border-yellow-500',
-              'bg-orange-500 border-orange-600',
-              'bg-zinc-300 dark:bg-zinc-700 border-zinc-400 dark:border-zinc-800'
-            ]"
-            :key="`beatInfo-${index}`"
-            :class="['w-full h-4 border rounded-[3px] ', beatClasses]"
-          >
-            &nbsp;
+        <div class="flex flex-col gap-1">
+          <div class="flex gap-2">
+            <div
+              v-for="(beatClasses, index) in [
+                'bg-orange-500 border-orange-600',
+                'bg-yellow-400 border-yellow-500',
+                'bg-orange-500 border-orange-600',
+                'bg-zinc-300 dark:bg-zinc-700 border-zinc-400 dark:border-zinc-800'
+              ]"
+              :key="`beatInfo-${index}`"
+              :class="['w-full h-4 border rounded-[3px] ', beatClasses]"
+            >
+              &nbsp;
+            </div>
+          </div>
+          <div class="grid grid-cols-4 gap-2 font-medium text-xs">
+            <span class="text-center">High</span>
+            <span class="text-center">Low</span>
+            <span class="text-center">High</span>
+            <span class="text-center">Mute</span>
           </div>
         </div>
-
-  <div class="grid grid-cols-4 gap-2 font-medium">
-<span class="text-center">High</span>
-<span class="text-center">Low</span>
-<span class="text-center">High</span>
-<span class="text-center">Mute</span>
-   </div>
       </div>
     </section>
 
